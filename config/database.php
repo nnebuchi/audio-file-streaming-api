@@ -91,6 +91,15 @@ return [
             'prefix_indexes' => true,
         ],
 
+        'mongodb' => [
+            'driver' => 'mongodb',
+            'dsn' => env('DB_DSN'),
+            'host' => env('DB_HOST', 'cluster0.8vw0a.mongodb.net'),
+            'database' => env('DB_DATABASE', 'wordbank'),
+            // 'username' => env('MONGODB_USERNAME'),
+            // 'password' => env('MONGODB_PASSWORD')
+        ],
+
     ],
 
     /*
