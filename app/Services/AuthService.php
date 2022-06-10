@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Response;
 
 class AuthService
 {
-    public static function createUser($email, $password, $username){
+    public static function createUser(string $email, string $password, string $username){
         $user               = new User;
         $user->email        = $email;
         $user->password     = Hash::make($password);

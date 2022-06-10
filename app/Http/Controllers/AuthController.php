@@ -24,6 +24,7 @@ class AuthController extends Controller
            
             return Response::json([
                 'status'=>'fail',
+                'message'=>'Registration Failed',
                 'errors'=>$validator->errors()
             ], 409 ); // Status code here
            
