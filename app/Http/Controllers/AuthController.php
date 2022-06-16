@@ -42,7 +42,7 @@ class AuthController extends Controller
                 'status'=>'fail',
                 'message'=>'Request Failed',
                 'errors'=>$validator->errors()
-            ], 422 ); // Status code here
+            ]); // Status code here
            
         }
         $user = User::where('email', $request->email)->firstOrFail();
