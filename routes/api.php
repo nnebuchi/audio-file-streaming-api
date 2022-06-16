@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => ['apicheck']], function () {
-    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/signup', [AuthController::class, 'signup']);
+    Route::get('/fetch-users', [UserApiController::class, 'fetchUsers']);
+    Route::post('/send-otp', [AuthController::class, 'sendOTP']);
+    Route::post('/verify-otp', [AuthController::class, 'verifyOTP']);
 });
 
 

@@ -4,8 +4,8 @@ namespace App\Services;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use App\Events\UserCreated;
 use Illuminate\Support\Facades\Response;
+use App\Events\UserCreated;
 
 class AuthService
 {
@@ -19,7 +19,7 @@ class AuthService
 
         self::sendOTP($user);
         
-        return Response::json([
+        return json_encode([
             'status'    => 'success',
             'email'     => $user->email,
             'message'   => 'registration successful. Check your email for your account verification code',
@@ -28,5 +28,18 @@ class AuthService
 
     public static function sendOTP($user){
         UserCreated::dispatch($user);
+    }
+
+    public static function verifyOTP($otp, $email){
+        $user = User::where(['email'=>$email, 'otp'=>$otp])->first();
+        if(is_null($user)){
+            return json_encode([
+                'status'    => 'fail',
+                'message'   => 'incorrect code',
+            ], 200);
+        }
+        $user->otp = null;
+        $user->email_verified_at = date('Y-m-d, h:i:s', time());
+        $user->save();
     }
 }

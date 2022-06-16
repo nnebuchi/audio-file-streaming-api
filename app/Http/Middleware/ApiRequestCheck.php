@@ -22,14 +22,14 @@ class ApiRequestCheck
                  'status'=>'fail',
                  'message'=>'missing authorization header'
              ], 406);
-         }
+        }
  
-         if ($request->bearerToken() != env('WORDBANK_TOKEN')) {
+        if ($request->bearerToken() != env('WORDBANK_TOKEN')) {
               return Response::json([
                  'status'=>'fail',
                  'message'=>'invalid bearer token'
              ], 406);
-         }
+        }
         return $next($request);
     }
 }
