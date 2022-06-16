@@ -11,20 +11,27 @@ use Illuminate\Support\Facades\Response;
 
 class AuthController extends Controller
 {
-    public function signup(Request $request): string
+    public function signup(Request $request)
     {   
         $validator = Validator::make($request->all(),[
             'email'         => 'required|email|unique:users',
             'password'      => 'required|min:8',
             'username'      => 'required|min:2',
         ]);
-
+        
+        
         if ($validator->fails()) {
-            return json_encode([
-                'status'=>'fail',
-                'message'=>'Registration Failed',
-                // 'errors'=>$validator->errors()
-            ], 406 ); // Status code here
+            $errs = json_decode($validator->errors(), true);
+            // return $validator->errors();
+            foreach($errs as $key=>$err){
+                return json_encode([
+                    'status'    => 'fail',
+                    'message'   => 'Registration Failed',
+                    'error'     =>  $err[0]
+                ]); // Status code here
+                break;
+            }
+            
            
         }
        return AuthService::createUser(sanitize_input($request->email), sanitize_input($request->password), sanitize_input($request->username));
