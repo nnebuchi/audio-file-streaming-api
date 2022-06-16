@@ -23,7 +23,7 @@ class AuthController extends Controller
             return json_encode([
                 'status'=>'fail',
                 'message'=>'Registration Failed',
-                'errors'=>$validator->errors()
+                // 'errors'=>$validator->errors()
             ], 406 ); // Status code here
            
         }
@@ -41,7 +41,7 @@ class AuthController extends Controller
             return json_encode([
                 'status'=>'fail',
                 'message'=>'Request Failed',
-                'errors'=>$validator->errors()
+                // 'errors'=>$validator->errors()
             ]); // Status code here
            
         }
@@ -52,7 +52,7 @@ class AuthController extends Controller
             'status'    => 'success',
             'email'     => $user->email,
             'message'   => 'Account verification code successfuly sent.',
-        ], 200);
+        ]);
          
     }
 
@@ -69,7 +69,7 @@ class AuthController extends Controller
                 'status'=>'fail',
                 'message'=>'Request Failed'
                 // 'errors'=>$validator->errors()
-            ], 406 ); // Status code here
+            ]); // Status code here
            
         }
         AuthService::verifyOTP(sanitize_input($request->otp), sanitize_input($request->email));
