@@ -67,8 +67,8 @@ class AuthController extends Controller
            
             return json_encode([
                 'status'=>'fail',
-                'message'=>'Request Failed',
-                'errors'=>$validator->errors()
+                'message'=>'Request Failed'
+                // 'errors'=>$validator->errors()
             ], 406 ); // Status code here
            
         }
