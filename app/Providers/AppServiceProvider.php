@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Validator::extend('single_word', 
+            function ($attribute, $value, $parameters, $validator) {
+                // if(is_string($value) && ! preg_match('/\s/u', $value)){
+                //     return $parameters.' must be a single word';
+                // }
+                // return is_string($value) && ! preg_match('/\s/u', $value);
+            }
+        );
     }
 }

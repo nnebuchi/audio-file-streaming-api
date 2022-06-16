@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Services\AuthService;
+use App\Rules\SingleWord;
 use Illuminate\Support\Facades\Response;
 
 
@@ -16,7 +17,8 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(),[
             'email'         => 'required|email|unique:users',
             'password'      => 'required|min:8',
-            'username'      => 'required|min:2',
+            'username'      => ['required', 'min:2', 'unique:users', new SingleWord ],
+            
         ]);
         
         
