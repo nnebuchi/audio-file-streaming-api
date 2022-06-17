@@ -78,7 +78,7 @@ class AuthController extends Controller
             foreach($errs as $key=>$err){
                 return json_encode([
                     'status'    => 'fail',
-                    'message'   => 'Registration Failed',
+                    'message'   => 'verification failed',
                     'error'     =>  $err[0]
                 ]); // Status code here
                 break;
