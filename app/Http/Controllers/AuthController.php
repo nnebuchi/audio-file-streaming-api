@@ -68,7 +68,7 @@ class AuthController extends Controller
     public function verifyOTP(Request $request){
         $validator = Validator::make($request->all(),[
             'email'         => 'required|email',
-            'otp'           => 'required',
+            'otp'           => 'required|integer',
         ]);
 
 
@@ -86,6 +86,6 @@ class AuthController extends Controller
             
            
         }
-        AuthService::verifyOTP(sanitize_input($request->otp), sanitize_input($request->email));
+        return AuthService::verifyOTP(sanitize_input($request->otp), sanitize_input($request->email));
     }
 }

@@ -36,10 +36,15 @@ class AuthService
             return json_encode([
                 'status'    => 'fail',
                 'message'   => 'incorrect code',
+                'error'     => 'incorrect code'
             ], 200);
         }
         $user->otp = null;
         $user->email_verified_at = date('Y-m-d, h:i:s', time());
         $user->save();
+        return json_encode([
+            'status'    => 'success',
+            'message'   => 'verification successful'
+        ]); // Status code here
     }
 }

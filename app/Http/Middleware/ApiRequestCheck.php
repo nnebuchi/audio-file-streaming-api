@@ -18,17 +18,17 @@ class ApiRequestCheck
     public function handle(Request $request, Closure $next)
     {   
         if (!$request->hasHeader('authorization')) {
-            return Response::json([
+            return json_encode([
                  'status'=>'fail',
                  'message'=>'missing authorization header'
-             ], 406);
+             ]);
         }
  
         if ($request->bearerToken() != env('WORDBANK_TOKEN')) {
-              return Response::json([
+              return json_encode([
                  'status'=>'fail',
                  'message'=>'invalid bearer token'
-             ], 406);
+             ]);
         }
         return $next($request);
     }
