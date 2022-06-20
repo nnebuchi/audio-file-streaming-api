@@ -23,16 +23,7 @@ class AuthController extends Controller
         
         
         if ($validator->fails()) {
-            $errs = json_decode($validator->errors(), true);
-            // return $validator->errors();
-            foreach($errs as $key=>$err){
-                return json_encode([
-                    'status'    => 'fail',
-                    'message'   => 'Registration Failed',
-                    'error'     =>  $err[0]
-                ]); // Status code here
-                break;
-            }
+            return returnValidationError($validator->errors(), 'Registration failed');
             
            
         }
@@ -41,20 +32,17 @@ class AuthController extends Controller
 
     public function sendOTP(Request $request){
         $validator = Validator::make($request->all(),[
-            'email'         => 'required|email'
+            'email'         => 'required|email|exists:users'
         ]);
 
 
         if ($validator->fails()) {
-           
-            return json_encode([
-                'status'=>'fail',
-                'message'=>'Request Failed',
-                // 'errors'=>$validator->errors()
-            ]); // Status code here
+            return returnValidationError($validator->errors(), 'something went wrong');
            
         }
-        $user = User::where('email', $request->email)->firstOrFail();
+
+        $user = User::where('email', sanitize_input($request->email))->first();
+        
         AuthService::sendOTP($user);
 
         return json_encode([
@@ -70,21 +58,11 @@ class AuthController extends Controller
             'email'         => 'required|email',
             'otp'           => 'required|integer',
         ]);
-
+        
 
         if ($validator->fails()) {
-            $errs = json_decode($validator->errors(), true);
-            // return $validator->errors();
-            foreach($errs as $key=>$err){
-                return json_encode([
-                    'status'    => 'fail',
-                    'message'   => 'verification failed',
-                    'error'     =>  $err[0]
-                ]); // Status code here
-                break;
-            }
+            return returnValidationError($validator->errors(), 'Verification Failed');
             
-           
         }
         return AuthService::verifyOTP(sanitize_input($request->otp), sanitize_input($request->email));
     }
