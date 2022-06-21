@@ -22,11 +22,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['middleware' => ['apicheck']], function () {
     Route::post('/signup', [AuthController::class, 'signup']);
-    Route::get('/fetch-users', [UserApiController::class, 'fetchUsers']);
     Route::post('/send-otp', [AuthController::class, 'sendOTP']);
     Route::post('/verify-otp', [AuthController::class, 'verifyOTP']);
     Route::get('/update-user', [UserApiController::class, 'updateUser']);
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/fetch-users', [UserApiController::class, 'fetchUsers']);
     
 });
+
 
 

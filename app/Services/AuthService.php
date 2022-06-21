@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
 use App\Events\UserCreated;
+use Illuminate\Support\Facades\DB;
 
 class AuthService
 {
@@ -42,12 +43,32 @@ class AuthService
         $user->otp = null;
         $user->email_verified_at = date('Y-m-d, h:i:s', time());
         $user->save();
-        $token = $user->createToken('auth_token')->plainTextToken;
+        return self::authenticate(($user));
+    }
+
+    public static function login($email, $password){
+        // the DB class was used instead of User Model because we needed to access the pasword property hich is hidden on the User Model
+        $user = DB::table('users')->where('email',$email)->first();
+        
+        if($user && Hash::check($password, $user->password)){
+           return self::authenticate(($user->email));
+        }
+
         return json_encode([
-            'status'    => 'success',
-            'message'   => 'verification successful',
-            'token'     =>  $token
+            'status'    => 'fail',
+            'message'   => 'Login failed',
+            'error'     => 'incorrect login details'
         ]); // Status code here
+    }
+
+    private static function authenticate($email){
+        $user = User::where('email', $email)->first();
+        $token = $user->createToken('auth_token')->plainTextToken;
+            return json_encode([
+                'status'    => 'success',
+                'message'   => 'verification successful',
+                'token'     =>  $token
+            ]); // Status code here
     }
     
 }
