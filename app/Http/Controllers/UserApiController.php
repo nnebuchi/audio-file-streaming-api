@@ -18,4 +18,16 @@ class UserApiController extends Controller
         );
     }
 
+    function updateUser(Request $request){
+        $user = User::where('id', sanitize_input($request->id))->first();
+        $user->email = sanitize_input(($request->email));
+        $user->username = sanitize_input(($request->name));
+        $user->save();
+        return json_encode([
+            'status'=>'success',
+            'message'=>'user updated',
+            'users' =>User::all()
+        ]);
+    }
+
 }

@@ -25,6 +25,8 @@ Route::group(['middleware' => ['apicheck']], function () {
     Route::get('/fetch-users', [UserApiController::class, 'fetchUsers']);
     Route::post('/send-otp', [AuthController::class, 'sendOTP']);
     Route::post('/verify-otp', [AuthController::class, 'verifyOTP']);
+    Route::get('/update-user', [UserApiController::class, 'updateUser']);
+    
 });
 
 

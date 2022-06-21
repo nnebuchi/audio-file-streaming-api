@@ -42,9 +42,12 @@ class AuthService
         $user->otp = null;
         $user->email_verified_at = date('Y-m-d, h:i:s', time());
         $user->save();
+        $token = $user->createToken('auth_token')->plainTextToken;
         return json_encode([
             'status'    => 'success',
-            'message'   => 'verification successful'
+            'message'   => 'verification successful',
+            'token'     =>  $token
         ]); // Status code here
     }
+    
 }
