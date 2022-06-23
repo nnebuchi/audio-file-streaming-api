@@ -44,7 +44,7 @@ class AuthService
         $user->otp = null;
         $user->email_verified_at = date('Y-m-d, h:i:s', time());
         $user->save();
-        return self::authenticate(($user));
+        return self::authenticate(($user->email);
     }
 
     public static function login($email, $password){
@@ -72,12 +72,12 @@ class AuthService
     private static function authenticate($email){
         $user = User::where('email', $email)->first();
         $token = $user->createToken('auth_token')->plainTextToken;
-            return json_encode([
-                'status'        => 'success',
-                'message'       => 'verification successful',
-                'token'         =>  $token,
-                'is_verified'   => true 
-            ]); // Status code here
+        return json_encode([
+            'status'        => 'success',
+            'message'       => 'successful',
+            'token'         =>  $token,
+            'is_verified'   => true 
+        ]); // Status code here
     }
     
 }
