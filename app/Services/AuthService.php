@@ -23,12 +23,14 @@ class AuthService
         return json_encode([
             'status'    => 'success',
             'email'     => $user->email,
+            'user'      =>  $user,
             'message'   => 'registration successful. Check your email for your account verification code',
         ], 200);
     }
 
     public static function sendOTP($user){
         UserCreated::dispatch($user);
+        return;
     }
 
     public static function verifyOTP($otp, $email){
