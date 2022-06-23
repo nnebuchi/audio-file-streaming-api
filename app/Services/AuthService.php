@@ -19,12 +19,14 @@ class AuthService
         $user->save();
 
         self::sendOTP($user);
-        
+        $token = $user->createToken('auth_token')->plainTextToken;
         return json_encode([
             'status'    => 'success',
             'email'     => $user->email,
-            'user'      =>  $user,
+            'user'      => $user,
+            'token'     => $token,
             'message'   => 'registration successful. Check your email for your account verification code',
+
         ], 200);
     }
 
