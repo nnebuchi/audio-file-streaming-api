@@ -44,7 +44,7 @@ class AuthService
         $user->otp = null;
         $user->email_verified_at = date('Y-m-d, h:i:s', time());
         $user->save();
-        return self::authenticate(($user->email);
+        return self::authenticate($user->email);
     }
 
     public static function login($email, $password){
