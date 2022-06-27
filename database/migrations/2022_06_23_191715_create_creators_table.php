@@ -34,6 +34,10 @@ class CreateCreatorsTable extends Migration
             $table->text('about_minister')->nullable();
             $table->text('profile_pic')->nullable();
             $table->text('logo')->nullable();
+            $table->string('ministry')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('verification_code')->nullable();
+            $table->integer('verified_expiry_date')->nullable();
             $table->timestamps();
         });
     }

@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Auth\Events\Registered;
 use App\Events\UserCreated;
+use App\Events\CreatorCreated;
 use App\Listeners\SendVerifyOTP;
+use App\Listeners\SendCreatorEmailVerificationMail;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
@@ -22,7 +24,11 @@ class EventServiceProvider extends ServiceProvider
         ],
         UserCreated::class => [
             SendVerifyOTP::class,
-        ]
+        ],
+
+        CreatorCreated::class => [
+            SendCreatorEmailVerificationMail::class,
+        ],
     ];
 
     /**

@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class ApiRequestCheck
+class ListenerApiRequestCheck
 {
     /**
      * Handle an incoming request.
@@ -23,8 +23,8 @@ class ApiRequestCheck
                  'message'=>'missing authorization header'
              ]);
         }
- 
-        if ($request->bearerToken() != env('WORDBANK_TOKEN')) {
+        // return $next($request);
+        if ($request->bearerToken() != env('WORDBANK_LISTENER_TOKEN')) {
               return json_encode([
                  'status'=>'fail',
                  'message'=>'invalid bearer token'

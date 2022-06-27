@@ -3,8 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\creators\AuthController as CreatorAuthController;
 use App\Http\Controllers\UserApiController;
-
+use App\Http\Controllers\PublishersController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,14 +21,34 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware' => ['apicheck']], function () {
+Route::group(['middleware' => ['listener-api-check']], function () {
     Route::post('/signup', [AuthController::class, 'signup']);
     Route::post('/send-otp', [AuthController::class, 'sendOTP']);
     Route::post('/verify-otp', [AuthController::class, 'verifyOTP']);
-    Route::get('/update-user', [UserApiController::class, 'updateUser']);
     Route::post('/login', [AuthController::class, 'login']);
-    Route::get('/fetch-users', [UserApiController::class, 'fetchUsers']);
+    // Route::get('/update-user', [UserApiController::class, 'updateUser']);
+    // Route::get('/fetch-users', [UserApiController::class, 'fetchUsers']);
     
+});
+
+
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::group(['prefix' => 'publishers'], function () {
+        Route::get('/', [PublishersController::class, 'get']);
+    });
+});
+
+
+
+Route::group(['prefix' => 'creator', 'middleware' => ['creator-api-check']], function () {
+    Route::post('signup', [CreatorAuthController::class, 'signup']);
+    // Route::post('send-consultant-reglink', 'AdminController@sendConsultantRegLink')->name('send-consultant-reglink');
+});
+
+
+Route::get('/user', function (Request $request) {
+    return $request->user();
 });
 
 
