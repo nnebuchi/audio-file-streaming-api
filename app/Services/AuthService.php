@@ -106,5 +106,47 @@ class AuthService
             'email'     =>$passwordReset->email
         ], 200);
     }
+
+    public static function checkPasswordResetToken(string $email, string $token){
+        $passwordReset = UsersPasswordReset::where(['email'=>$email, 'token'=>$token])->first();
+        if(!$passwordReset){
+            return Response::json([
+                'status'    => 'fail',
+                'message'   => 'Invalid Link',
+                'error'     => 'invalid reset link'
+            ], 200);
+        }
+         return Response::json([
+            'status'    => 'success',
+            'message'   => 'Reset Instance found',
+            'data'     =>  $passwordReset
+        ], 200);
+    }
+
+    public static function resetPassword(string $email,  string $password, string $token){
+        $passwordReset = UsersPasswordReset::where(['email'=>$email, 'token'=>$token]);
+        if(!$passwordReset){
+            return Response::json([
+                'status'    => 'fail',
+                'message'   => 'Invalid reset payload',
+                'error'     =>  'Invlaid reset token and email supplied'
+            ], 200);
+        }
+
+        $user = User::where('email', $email)->first();
+        if(!$user){
+            return Response::json([
+                'status'    => 'fail',
+                'message'   => 'Invalid user',
+                'error'     =>  'Invlaid reset token and email supplied'
+            ], 200);
+        }
+        $user->password = Hash::make($password);
+        $user->save();
+        return Response::json([
+            'status'    => 'success',
+            'message'   => 'password successfully changed'
+        ], 200);
+    }
     
 }

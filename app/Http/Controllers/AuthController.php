@@ -85,4 +85,21 @@ class AuthController extends Controller
 
         return AuthService::sendPasswordResetOTP(sanitize_input($request->email));
     }
+
+    public function checkPasswordResetToken(Request $request){
+        return AuthService::checkPasswordResetToken(sanitize_input($request->email), sanitize_input($request->token));
+    }
+
+    public function resetPassword(Request $request){
+
+        $validator = Validator::make($request->all(),[
+            'email'         => 'required',
+            'password'      => 'required',
+            'token'         => 'required'
+        ]);
+        if ($validator->fails()) {
+            return returnValidationError($validator->errors(), 'Registration failed');
+        }
+        return AuthService::resetPassword(sanitize_input($request->email), sanitize_input($request->password), sanitize_input($request->token));
+    }
 }
