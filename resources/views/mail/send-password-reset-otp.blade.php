@@ -18,15 +18,15 @@
 </div>
 <h3>Hi</h3>
 {{-- <p>To get started, please click the button below to verify your email address.</p> --}}
-<p>You requested a password reset!</p>
+<p>We are thrilled to see you here!</p>
 
 
 	{{-- <a style="background-color: #5c449b; color:white; padding: 7px; text-decoration: none; border-radius: 5px; "  href="{{ url('verify-email/'.$email.'/'.$verification_code) }}">Verify Email</a> --}}
 
 	<p>What happens next?.</p>
-	<p>Use the OTP token below to verify your request</p>
+	<p>Verify your accout. Your verification code is shown below</p>
 
-	<p><strong>{{ $passwordRequest->token }}</strong></p>
+	<p><strong>{{ $passwordReset->token }}</strong></p>
 
 	{{-- <a href="{{ url('verify-email/'.$email.'/'.$verification_code) }}">{{ url('verify-email/'.$email.'/'.$verification_code) }}</a> --}}
 	<hr>

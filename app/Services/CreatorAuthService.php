@@ -6,9 +6,11 @@ use App\Models\Creator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
 use App\Events\CreatorCreated;
+use App\Events\PasswordResetRequested;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Models\User;
+use App\Models\PasswordReset;
 
 class CreatorAuthService
 {
@@ -29,7 +31,7 @@ class CreatorAuthService
         ]);
     }
 
-    public static function sendVerificationMail($user){
+    public static function sendVerificationMail(Creator $user){
         CreatorCreated::dispatch($user);
         return;
     }
@@ -42,7 +44,7 @@ class CreatorAuthService
                 'error'     => 'Link not found'
             ]); // Status code here
         }
-        $user = User::where(['email'=>$email, 'code'=>$code])->first();
+        $user = Creator::where(['email'=>$email, 'verification_code'=>$code])->first();
 
         if(is_null($user)){
             return json_encode([
@@ -57,17 +59,12 @@ class CreatorAuthService
         return self::authenticate($user->email);
     }
 
+
     public static function login($email, $password){
-        // the DB class was used instead of User Model because we needed to access the pasword property hich is hidden on the User Model
-        $user = DB::table('users')->where('email',$email)->first();
-        if($user && (is_null($user->otp || $user->otp==''))){
-            return json_encode([
-                'status'        => 'success',
-                'message'       => 'Login failed',
-                'error'         => 'Email not verified',
-                'is_verified'   => false  
-            ]);
-        }
+        // return Creator::all();
+        // the DB class was used instead of User Model because we needed to access the pasword property which is hidden on the User Model
+        $user = DB::table('creators')->where('email',$email)->first();
+        
         if($user && Hash::check($password, $user->password)){
            return self::authenticate(($user->email));
         }
@@ -79,8 +76,11 @@ class CreatorAuthService
         ]); // Status code here
     }
 
-    private static function authenticate($email){
-        $user = User::where('email', $email)->first();
+    
+
+    private static function authenticate(string $email){
+        $user = Creator::where('email', $email)->first();
+        
         $token = $user->createToken('auth_token')->plainTextToken;
         return json_encode([
             'status'        => 'success',
@@ -89,5 +89,74 @@ class CreatorAuthService
             'is_verified'   => true 
         ]); // Status code here
     }
-    
+
+    public static function sendPasswordResetLink(string $email){
+
+        $user = Creator::where('email', $email)->first();
+        if(!$user){
+            return Response::json([
+                'status'    => 'fail',
+                'message'   => 'Invalid user',
+                'error'     =>  'Invlaid reset token and email supplied'
+            ], 200);
+        }
+        PasswordReset::where('email', $email)->delete();
+        $passwordReset = new PasswordReset;
+        $passwordReset->email = $email;
+        $passwordReset->token = Str::random(24);
+        $passwordReset->save();
+
+        PasswordResetRequested::dispatch($passwordReset);
+
+        return Response::json([
+            'status'=>'success',
+            'message'=>'Password reset link sent to your email address',
+        ], 200);
+    }
+
+    public static function checkPasswordResetToken(string $email, string $token){
+        $passwordReset = PasswordReset::where(['email'=>$email, 'token'=>$token])->first();
+        if(!$passwordReset){
+            return Response::json([
+                'status'    => 'fail',
+                'message'   => 'Invalid Link',
+                'error'     => 'invalid reset link'
+            ], 200);
+        }
+         return Response::json([
+            'status'    => 'success',
+            'message'   => 'Reset Instance found',
+            'data'     =>  $passwordReset
+        ], 200);
+    }
+
+    public static function resetPassword(string $email,  string $password, string $token){
+        $passwordReset = PasswordReset::where(['email'=>$email, 'token'=>$token]);
+        if(!$passwordReset){
+            return Response::json([
+                'status'    => 'fail',
+                'message'   => 'Invalid reset payload',
+                'error'     =>  'Invlaid reset token and email supplied'
+            ], 200);
+        }
+
+        $user = Creator::where('email', $email)->first();
+        if(!$user){
+            return Response::json([
+                'status'    => 'fail',
+                'message'   => 'Invalid user',
+                'error'     =>  'Invlaid reset token and email supplied'
+            ], 200);
+        }
+        $user->password = Hash::make($password);
+        $user->save();
+        return Response::json([
+            'status'    => 'success',
+            'message'   => 'password successfully changed'
+        ], 200);
+    }
+
+    public static function uploadProfilePhoto($request){
+        
+    }
 }

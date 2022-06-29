@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class AuthentcatedListener
+class VerifiedCreator
 {
     /**
      * Handle an incoming request.

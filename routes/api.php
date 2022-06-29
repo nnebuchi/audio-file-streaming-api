@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\creators\AuthController as CreatorAuthController;
+use App\Http\Controllers\creators\CreatorController;
 use App\Http\Controllers\UserApiController;
 use App\Http\Controllers\PublishersController;
 /*
@@ -26,6 +27,7 @@ Route::group(['middleware' => ['listener-api-check']], function () {
     Route::post('/send-otp', [AuthController::class, 'sendOTP']);
     Route::post('/verify-otp', [AuthController::class, 'verifyOTP']);
     Route::post('/login', [AuthController::class, 'login']);
+    Route::post('forgot-password', [AuthController::class, 'sendPasswordResetOTP']);
     // Route::get('/update-user', [UserApiController::class, 'updateUser']);
     // Route::get('/fetch-users', [UserApiController::class, 'fetchUsers']);
     
@@ -41,8 +43,31 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 
 
-Route::group(['prefix' => 'creator', 'middleware' => ['creator-api-check']], function () {
-    Route::post('signup', [CreatorAuthController::class, 'signup']);
+Route::group(['prefix' => 'creator'], function () {
+    
+    
+    Route::group(['middleware' => ['creator-api-check']], function () {
+
+        Route::post('signup', [CreatorAuthController::class, 'signup']);
+
+        Route::get('verify-email/{email}/{code}', [CreatorAuthController::class, 'verifyEmail']);
+
+        Route::post('login', [CreatorAuthController::class, 'login']);
+
+        Route::post('forgot-password', [CreatorAuthController::class, 'sendPasswordResetLink']);
+
+        Route::get('check-password-reset-token/{email}/{token}', [CreatorAuthController::class, 'checkPasswordResetToken']);
+
+        Route::post('reset-password', [CreatorAuthController::class, 'resetPassword']);
+
+    });
+    
+    Route::group(['middleware' => ['auth:sanctum']], function () {
+        Route::get('/get-user', [CreatorAuthController::class, 'getUser']);
+        Route::group(['prefix' => 'profile'], function () {
+            Route::post('update', [CreatorController::class, 'updateContactProfile']);
+        });
+    });
     // Route::post('send-consultant-reglink', 'AdminController@sendConsultantRegLink')->name('send-consultant-reglink');
 });
 

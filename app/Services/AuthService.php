@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
 use App\Events\UserCreated;
 use Illuminate\Support\Facades\DB;
+use App\Models\UsersPasswordReset;
+use App\Events\UserPasswordResetRequested;
 
 class AuthService
 {
@@ -78,6 +80,31 @@ class AuthService
             'token'         =>  $token,
             'is_verified'   => true 
         ]); // Status code here
+    }
+
+    public static function sendPasswordResetOTP(string $email){
+
+        $user = User::where('email', $email)->first();
+        if(!$user){
+            return Response::json([
+                'status'    => 'fail',
+                'message'   => 'Invalid user',
+                'error'     =>  'Invlaid reset token and email supplied'
+            ], 200);
+        }
+        UsersPasswordReset::where('email', $email)->delete();
+        $passwordReset = new UsersPasswordReset;
+        $passwordReset->email = $email;
+        $passwordReset->token = generateOTP();
+        $passwordReset->save();
+
+        UserPasswordResetRequested::dispatch($passwordReset);
+
+        return Response::json([
+            'status'    =>'success',
+            'message'   =>'Password reset token sent to your email address',
+            'email'     =>$passwordReset->email
+        ], 200);
     }
     
 }

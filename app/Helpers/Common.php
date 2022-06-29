@@ -1,5 +1,7 @@
 <?php
 
+use Laravel\Sanctum\PersonalAccessToken;
+
 if (!function_exists('generateOTP')) {
     /**
      * Undocumented function
@@ -24,5 +26,10 @@ if (!function_exists('generateOTP')) {
             ]); // Status code here
             break;
         }
+    }
+
+    function getUser($request){
+        $token = PersonalAccessToken::findToken($request->bearerToken());
+        return $token->tokenable;
     }
 }
