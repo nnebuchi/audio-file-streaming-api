@@ -97,9 +97,12 @@ class AuthController extends Controller
             'password'      => 'required',
             'token'         => 'required'
         ]);
+
         if ($validator->fails()) {
-            return returnValidationError($validator->errors(), 'Registration failed');
+            return returnValidationError($validator->errors(), 'Request failed');
         }
+
         return AuthService::resetPassword(sanitize_input($request->email), sanitize_input($request->password), sanitize_input($request->token));
+
     }
 }
