@@ -28,7 +28,7 @@ Route::group(['middleware' => ['listener-api-check']], function () {
     Route::post('/verify-otp', [AuthController::class, 'verifyOTP']);
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('forgot-password', [AuthController::class, 'sendPasswordResetOTP']);
-    Route::get('check-password-reset-token/{email}/{token}', [AuthController::class, 'checkPasswordResetToken']);
+    Route::post('check-password-reset-token', [AuthController::class, 'checkPasswordResetToken']);
     Route::post('reset-password', [AuthController::class, 'resetPassword']);
     // Route::get('/update-user', [UserApiController::class, 'updateUser']);
     // Route::get('/fetch-users', [UserApiController::class, 'fetchUsers']);

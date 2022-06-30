@@ -87,6 +87,13 @@ class AuthController extends Controller
     }
 
     public function checkPasswordResetToken(Request $request){
+        $validator = Validator::make($request->all(),[
+            'email'         => 'required|email',
+            'token'         => 'required'
+        ]);
+        if ($validator->fails()) {
+            return returnValidationError($validator->errors(), 'Request failed');
+        }
         return AuthService::checkPasswordResetToken(sanitize_input($request->email), sanitize_input($request->token));
     }
 
