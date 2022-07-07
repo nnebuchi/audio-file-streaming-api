@@ -40,6 +40,7 @@ Route::group(['middleware' => ['listener-api-check']], function () {
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::group(['prefix' => 'publishers'], function () {
         Route::get('/', [PublishersController::class, 'get']);
+        Route::post('select', [PublishersController::class, 'select']);
     });
 });
 
@@ -59,6 +60,8 @@ Route::group(['prefix' => 'creator'], function () {
         Route::post('forgot-password', [CreatorAuthController::class, 'sendPasswordResetLink']);
 
         Route::get('check-password-reset-token/{email}/{token}', [CreatorAuthController::class, 'checkPasswordResetToken']);
+
+
 
         Route::post('reset-password', [CreatorAuthController::class, 'resetPassword']);
 
