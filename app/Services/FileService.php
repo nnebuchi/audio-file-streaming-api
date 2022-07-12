@@ -11,7 +11,7 @@ class FileService{
 
             $files->where('creator_id', sanitize_input($request->publisher_id));
         }
-        if($request->has('pulishers')){
+        if($request->pulishers){
             $files->whereIn('creator_id', $request->publishers);
         }
 
