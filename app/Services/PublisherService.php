@@ -20,7 +20,7 @@ class PublisherService{
         return json_encode([
             'status'    => 'success',
             'message'   => 'publishers selection successful',
-            "data"      =>  $user->publishers
+            "data"      =>  $user->publishers_ids
         ]);
     }
 }
