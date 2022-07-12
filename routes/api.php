@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserApiController;
 use App\Http\Controllers\PublishersController;
+use App\Http\Controllers\FilesController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
