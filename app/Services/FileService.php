@@ -15,7 +15,10 @@ class FileService{
             $files->whereIn('creator_id', $request->publishers);
         }
 
-        return $files->get();
+        return json_encode([
+            'status'    => 'success',
+            'data'  => $files->get(),
+        ]);
     }
     
 }
