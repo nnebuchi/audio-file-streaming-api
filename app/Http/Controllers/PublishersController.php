@@ -20,6 +20,6 @@ class PublishersController extends Controller
             return returnValidationError($validator->errors(), 'Selecting publishers failed');
         }
         // return $request->publishers;
-        return PublisherService::select(sanitize_input($request->publishers));
+        return PublisherService::select($request->user()->id, sanitize_input($request->publishers));
     }
 }
