@@ -3,14 +3,14 @@
 namespace app\Services;
 use App\Models\AudioFile;
 use App\Models\Listen;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 
 class FileService{
 
     public static function getFiles($request){
-
-        $files = AudioFile::select('title','file')::with('creator')->where('visible', '1');
-
+        // $files = AudioFile::select('title','title')::with('creator')->where('visible', '1');
+        $files = DB::Table('audio_files')->select('title','file')::with('creator')->where('visible', '1');
         if($request->publisher_id){
 
             $files = $files->where('creator_id', sanitize_input($request->publisher_id));
