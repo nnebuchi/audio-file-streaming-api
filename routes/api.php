@@ -38,7 +38,7 @@ Route::group(['middleware' => ['listener-api-check']], function () {
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::group(['prefix' => 'publishers'], function () {
-        Route::get('/', [PublishersController::class, 'getFiles']);
+        Route::get('/', [PublishersController::class, 'get']);
         Route::post('select', [PublishersController::class, 'select']);
     });
 
