@@ -13,19 +13,19 @@ class FileService{
 
         if($request->publisher_id){
 
-            $files->where('creator_id', sanitize_input($request->publisher_id));
+            $files = $files->where('creator_id', sanitize_input($request->publisher_id));
             
         }
         if($request->publishers){
-            $files->whereIn('creator_id', $request->publishers);
+            $files = $files->whereIn('creator_id', $request->publishers);
             
         }
         if($request->sort && $request->sort == 'asc'){
-            $files->orderBy('created_at', 'asc');
+            $files = $files->orderBy('created_at', 'asc');
         }
 
         if($request->latest){
-            $files->latest();
+            $files =$files->latest();
         }
         
         $files = $request->publishers ? $files->inRandomOrder()->limit(50) : $files->paginate(50);
