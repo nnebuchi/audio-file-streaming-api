@@ -11,13 +11,19 @@ class FileService{
 
             $files->where('creator_id', sanitize_input($request->publisher_id));
         }
-        if($request->pulishers){
+        if($request->publishers){
             $files->whereIn('creator_id', $request->publishers);
         }
+        if($request->sort && $request->sort == 'asc'){
+            $files->orderBy('created_at', 'asc');
+        }
 
+        if($request->latest){
+            $files->latest();
+        }
         return json_encode([
             'status'    => 'success',
-            'data'  => $files->get(),
+            'data'  => $files->paginate(50),
         ]);
     }
     
