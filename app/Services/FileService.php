@@ -9,7 +9,7 @@ class FileService{
 
     public static function getFiles($request){
 
-        $files = AudioFile::with('creator')->where('visible', '1');
+        $files = AudioFile::select('title','file')::with('creator')->where('visible', '1');
 
         if($request->publisher_id){
 
@@ -28,7 +28,7 @@ class FileService{
             $files =$files->latest();
         }
         
-        $files = $request->publishers ? $files->inRandomOrder()->limit(50)->pluck('title', 'cover_photo') : $files->paginate(50);
+        $files = $request->publishers ? $files->inRandomOrder()->limit(50)->get() : $files->paginate(50);
         
         return Response::json([
             'status'    => 'success',
