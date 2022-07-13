@@ -19,7 +19,6 @@ class FileService{
         }
         if($request->publishers){
             $files = $files->whereIn('creator_id', $request->publishers);
-            
         }
         if($request->sort && $request->sort == 'asc'){
             $files = $files->orderBy('created_at', 'asc');
@@ -29,7 +28,7 @@ class FileService{
             $files =$files->latest();
         }
         
-        $files = $request->publishers ? $files->inRandomOrder()->limit(50)->get(['title','file']) : $files->paginate(50);
+        $files = $request->publishers ? $files->inRandomOrder()->limit(50)->get(['title','file', 'creator.firstname', 'creator.lastname']) : $files->paginate(50);
         
         return Response::json([
             'status'    => 'success',
