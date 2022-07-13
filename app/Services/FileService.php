@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Response;
 class FileService{
 
     public static function getFiles($request){
+
         $files = AudioFile::with('creator')->where('visible', '1');
+
         if($request->publisher_id){
 
             $files->where('creator_id', sanitize_input($request->publisher_id));
@@ -26,7 +28,7 @@ class FileService{
             $files->latest();
         }
         
-        $files = $request->publishers ? $files->random(50) : $files->paginate(50);
+        $files = $request->publishers ? $files->inRandomOrder()->limit(50) : $files->paginate(50);
 
 
         
