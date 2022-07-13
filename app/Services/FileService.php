@@ -10,10 +10,10 @@ class FileService{
 
     public static function getFiles($request){
         // $files = AudioFile::select('title','title')::with('creator')->where('visible', '1');
-        $files = AudioFile::with('creator')->where('visible', '1');
-        // $files = AudioFile::with(['creator' => function ($query) {
-        //     $query->select(['firstname', 'lastname']);
-        // }]);
+        // $files = AudioFile::with('creator')->where('visible', '1');
+        $files = AudioFile::with(['creator' => function ($query) {
+            $query->select(['firstname', 'lastname']);
+        }]);
 
         if($request->publisher_id){
 
@@ -31,7 +31,7 @@ class FileService{
             $files =$files->latest();
         }
         
-        $files = $request->publishers ? $files->inRandomOrder()->limit(50)->get(['title','file', 'creator:firstname, lastname']) : $files->paginate(50);
+        $files = $request->publishers ? $files->inRandomOrder()->limit(50)->get(['title','file']) : $files->paginate(50);
         
         return Response::json([
             'status'    => 'success',
