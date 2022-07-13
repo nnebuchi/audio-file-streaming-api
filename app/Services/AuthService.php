@@ -78,6 +78,7 @@ class AuthService
             'status'        => 'success',
             'message'       => 'successful',
             'token'         =>  $token,
+            'user'          =>  $user,
             'is_verified'   => true 
         ]); // Status code here
     }
