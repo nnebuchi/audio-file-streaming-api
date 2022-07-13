@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class AudioFile extends Model
 {
     use HasFactory;
+
+    public function creator(){
+        return $this->belongsTo(Creator::class);
+    }
 }

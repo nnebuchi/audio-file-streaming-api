@@ -8,13 +8,15 @@ use Illuminate\Support\Facades\Response;
 class FileService{
 
     public static function getFiles($request){
-        $files = AudioFile::where('visible', '1');
+        $files = AudioFile::with('creator')->where('visible', '1');
         if($request->publisher_id){
 
             $files->where('creator_id', sanitize_input($request->publisher_id));
+            
         }
         if($request->publishers){
             $files->whereIn('creator_id', $request->publishers);
+            
         }
         if($request->sort && $request->sort == 'asc'){
             $files->orderBy('created_at', 'asc');
@@ -23,9 +25,14 @@ class FileService{
         if($request->latest){
             $files->latest();
         }
+        
+        $files = $request->publishers ? $files->random(50) : $files->paginate(50);
+
+
+        
         return Response::json([
             'status'    => 'success',
-            'data'  => $files->paginate(50),
+            'data'  => $files,
         ], 200);
     }
 
