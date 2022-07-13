@@ -2,6 +2,8 @@
 
 namespace app\Services;
 use App\Models\AudioFile;
+use App\Models\Listen;
+use Illuminate\Support\Facades\Response;
 
 class FileService{
 
@@ -21,9 +23,31 @@ class FileService{
         if($request->latest){
             $files->latest();
         }
-        return json_encode([
+        return Response::json([
             'status'    => 'success',
             'data'  => $files->paginate(50),
+        ], 200);
+    }
+
+    public static function getSingleFile($request){
+        $file = AudioFile::where('slug', sanitize_input($request->slug))->first();
+        if($file){
+            $listen = new Listen;
+            $listen->audio_file_id = $file->id;
+            $listen->user_id       = $request->user()->id;
+            $listen->save();
+
+            return json_encode([
+                'status'    =>'success',
+                'message'   =>'File fetched',
+                'data'      =>$file
+            ]);
+        }
+
+        return json_encode([
+            'status'    =>'fail',
+            'message'   =>'File not found',
+            'error'      =>'file not found'
         ]);
     }
     

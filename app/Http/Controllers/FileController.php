@@ -17,4 +17,8 @@ class FileController extends Controller
         ]);
         return FileService::getFiles($request);
     }
+
+    public function getSingleFile(Request $request){
+        return FileService::getSingleFile($request);
+    }
 }
