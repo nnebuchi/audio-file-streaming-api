@@ -19,4 +19,8 @@ class Creator extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function audioFiles(){
+        return $this->hasMany(Creator::class);
+    }
 }

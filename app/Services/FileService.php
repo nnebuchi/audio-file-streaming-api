@@ -10,7 +10,12 @@ class FileService{
 
     public static function getFiles($request){
         // $files = AudioFile::select('title','title')::with('creator')->where('visible', '1');
-        $files = AudioFile::with('creator')->where('visible', '1');
+        // $files = AudioFile::select('title', 'file')->where('visible', '1')->with('creator:firstname');
+        $files = AudioFile::select('id', 'title', 'file', 'creator_id')
+        ->with(array('creator'=>function($query){
+            $query->select('id', 'firstname','lastname');
+        }));
+        // Post::select('id','title','user_id')->with('user:id,username')->get();
         // $files = AudioFile::with(['creator' => function ($query) {
         //     $query->select(['firstname', 'lastname']);
         // }]);
