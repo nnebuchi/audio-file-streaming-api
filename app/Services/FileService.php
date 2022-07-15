@@ -32,7 +32,7 @@ class FileService{
                     'data'     =>  'No selected publishers'
                 ], 200);
             }
-            $files = $files->whereIn('creator_id', $request->user()->publishers_ids);
+            $files = $files->whereIn('creator_id', json_decode($request->user()->publishers_ids));
         }
 
         if($request->sort && $request->sort == 'asc'){
