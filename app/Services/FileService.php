@@ -24,8 +24,8 @@ class FileService{
             $files = $files->where('creator_id', sanitize_input($request->publisher_id));
         }
 
-        if($request->publishers){
-            $files = $files->whereIn('creator_id', $request->publishers);
+        if($request->publishers && $request->publishers == 'my-pick'){
+            $files = $files->whereIn('creator_id', $request->user()->publishers_ids);
         }
 
         if($request->sort && $request->sort == 'asc'){
