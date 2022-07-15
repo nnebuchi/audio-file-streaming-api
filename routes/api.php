@@ -45,6 +45,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::group(['prefix' => 'files'], function () {
         Route::post('/', [FileController::class, 'getFiles']);
         Route::get('/{slug}', [FileController::class, 'getSingleFile']);
+        Route::get('/{slug}/play', [FileController::class, 'play']);
     });
 });
 

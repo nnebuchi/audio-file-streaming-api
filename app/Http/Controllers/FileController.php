@@ -21,4 +21,13 @@ class FileController extends Controller
     public function getSingleFile(Request $request){
         return FileService::getSingleFile($request);
     }
+
+    public function play(Request $request){
+        $validator = Validator::make($request->all(),[
+            'slug'         => 'required'
+        ]);
+        return FileService::play($request);
+    }
+
+    
 }
