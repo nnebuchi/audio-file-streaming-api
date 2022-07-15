@@ -25,7 +25,7 @@ class FileService{
         }
 
         if($request->publishers && $request->publishers == 'my-pick'){
-            if($request->user()->publishers_ids){
+            if(!$request->user()->publishers_ids){
                 return Response::json([
                     'status'   => 'fail',
                     'message'  => 'user has no selected publishers',
