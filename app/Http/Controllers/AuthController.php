@@ -23,8 +23,6 @@ class AuthController extends Controller
         
         if ($validator->fails()) {
             return returnValidationError($validator->errors(), 'Registration failed');
-            
-           
         }
        return AuthService::createUser(sanitize_input($request->email), sanitize_input($request->password), sanitize_input($request->username));
     }
@@ -110,6 +108,5 @@ class AuthController extends Controller
         }
 
         return AuthService::resetPassword(sanitize_input($request->email), sanitize_input($request->password), sanitize_input($request->token));
-
     }
 }

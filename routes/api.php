@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserApiController;
 use App\Http\Controllers\PublishersController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\PaystackController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('/paystack-events', [PaystackController::class, 'events']);
 Route::group(['middleware' => ['listener-api-check']], function () {
     Route::post('/signup', [AuthController::class, 'signup']);
     Route::post('/send-otp', [AuthController::class, 'sendOTP']);
