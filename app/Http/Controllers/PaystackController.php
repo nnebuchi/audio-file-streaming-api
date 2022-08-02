@@ -13,9 +13,8 @@ class PaystackController extends Controller
         $paystack->dump = json_encode($request->all());
         
 
-        if($request->reference){
-            $paystack->reference = $request->reference;
-
+        if($request->data && $request->data->reference){
+            $paystack->reference = $request->data->reference;
         }
         $paystack->save();
         return 'done';
