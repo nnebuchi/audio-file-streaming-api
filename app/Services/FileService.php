@@ -76,6 +76,7 @@ class FileService{
     }
 
     public static function play($request){
+        
         $file = AudioFile::where('slug', sanitize_input($request->slug))->first();
         
         if($file){
@@ -87,7 +88,7 @@ class FileService{
             
             return json_encode([
                 'status'    =>'success',
-                'message'   =>'Palying',
+                'message'   =>'Playing',
             ]);
         }
         
