@@ -11,7 +11,7 @@ class FileService{
     public static function getFiles($request){
         // $files = AudioFile::select('title','title')::with('creator')->where('visible', '1');
         // $files = AudioFile::select('title', 'file')->where('visible', '1')->with('creator:firstname');
-        $files = AudioFile::select('id', 'title', 'file', 'cover_photo', 'creator_id')
+        $files = AudioFile::select('id', 'slug', 'title', 'file', 'cover_photo', 'creator_id')
         ->with(array('creator'=>function($query){
             $query->select('id', 'firstname','lastname');
         }));
