@@ -43,6 +43,10 @@ class FileService{
             $files->inRandomOrder();
         }
 
+        if($request->order_listens){
+            $files->withCount('listens')->orderByDesc('listens_count');
+        }
+
         // if($request->latest){
         //     $files =$files->latest();
         // }
