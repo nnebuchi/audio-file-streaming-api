@@ -3,6 +3,7 @@
 namespace app\Services;
 use App\Models\AudioFile;
 use App\Models\Listen;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 
@@ -103,4 +104,36 @@ class FileService{
         ]);
     }
     
+
+    public static function toggleFavourites(String $slug, String $user_id){
+
+        $user = User::where('id', $user_id)->first();
+
+        if(!$user){
+            return json_encode([
+                'status'    =>'fail',
+                'message'   =>'User not found',
+                'error'      =>'unathorised access'
+            ]);
+        }
+
+        // retrieve existing favoutites and explode it
+        $userFavourites = explode(',', $user->favourites);
+        if(in_array($slug, $userFavourites)){
+            $key = array_search($slug, $userFavourites);
+            unset($userFavourites[$key]);
+        }else{
+            array_push($userFavourites, $slug);
+        }
+
+        $user->favourites = $userFavourites;
+
+        $user->save();
+
+        return json_encode([
+            'status'        =>'success',
+            'message'       =>'Favourites updated',
+            'favourites'    =>$user->favourites
+        ]);
+    }
 }
