@@ -118,7 +118,8 @@ class FileService{
         }
 
         // retrieve existing favoutites and explode it
-        $userFavourites = explode(',', $user->favourites);
+        $userFavourites = json_decode($user->favourites, true);
+
         if(in_array($slug, $userFavourites)){
             $key = array_search($slug, $userFavourites);
             unset($userFavourites[$key]);

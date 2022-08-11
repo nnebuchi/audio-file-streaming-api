@@ -29,7 +29,7 @@ class FileController extends Controller
         return FileService::play($request);
     }
 
-    public function addToFavourites(Request $request){
+    public function toggleFavourites(Request $request){
 
         $validator = Validator::make($request->all(),[
             'slug'         => 'required'
