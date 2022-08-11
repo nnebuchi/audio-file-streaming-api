@@ -127,7 +127,7 @@ class FileService{
             array_push($userFavourites, $slug);
         }
 
-        $user->favourites = $userFavourites;
+        $user->favourites = json_encode($userFavourites);
 
         $user->save();
 
