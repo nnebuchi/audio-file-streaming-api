@@ -26,6 +26,7 @@ class FileService{
         }
 
         if($request->publishers && $request->publishers == 'my-pick'){
+            
             if(!$request->user()->publishers_ids){
                 return Response::json([
                     'status'   => 'fail',
@@ -33,6 +34,7 @@ class FileService{
                     'data'     =>  'No selected publishers'
                 ], 200);
             }
+
             $files = $files->whereIn('creator_id', json_decode($request->user()->publishers_ids));
         }
 
