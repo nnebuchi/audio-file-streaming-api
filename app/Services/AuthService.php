@@ -74,6 +74,7 @@ class AuthService
     private static function authenticate($email){
         $user = User::where('email', $email)->first();
         $token = $user->createToken('auth_token')->plainTextToken;
+        $user->favourites = json_decode($user->favourites);
         return json_encode([
             'status'        => 'success',
             'message'       => 'successful',
