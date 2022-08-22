@@ -26,7 +26,7 @@ class PublisherService{
     }
 
     public static function getTrendingPublishers(){
-        $listens = Listen::select('*')
+        $listens = Listen::select('audio_file_id', 'user_id')
                     ->groupBy('audio_file_id')
                     ->get();
         return json_encode([
