@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::group(['prefix' => 'publishers'], function () {
         Route::get('/', [PublishersController::class, 'get']);
         Route::post('select', [PublishersController::class, 'select']);
+        Route::get('/trending', [PublishersController::class, 'getTrendingPublishers']);
     });
 
     Route::group(['prefix' => 'files'], function () {

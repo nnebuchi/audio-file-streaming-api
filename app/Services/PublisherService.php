@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 use App\Models\Creator;
+use App\Models\Listen;
 use App\Models\User;
 
 class PublisherService{
@@ -21,6 +22,18 @@ class PublisherService{
             'status'    => 'success',
             'message'   => 'publishers selection successful',
             "data"      =>  $user->publishers_ids
+        ]);
+    }
+
+    public static function getTrendingPublishers(){
+        $listens = Listen::select('*')
+                    ->groupBy('audio_file_id')
+                    ->get();
+        return json_encode([
+            'status'    => 'success',
+            'message'   => 'publishers selection successful',
+            "data"      =>  $listens
+
         ]);
     }
 }

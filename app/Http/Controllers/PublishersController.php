@@ -22,4 +22,8 @@ class PublishersController extends Controller
         // return $request->publishers;
         return PublisherService::select(sanitize_input($request->publishers), $request->user()->id);
     }
+
+    public function getTrendingPublishers(){
+        return PublisherService::getTrendingPublishers();
+    }
 }
