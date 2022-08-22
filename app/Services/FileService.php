@@ -136,7 +136,7 @@ class FileService{
         return json_encode([
             'status'        =>'success',
             'message'       =>'Favourites updated',
-            'favourites'    =>json_encode($user->favourites)
+            'favourites'    =>$user->favourites
         ]);
     }
 }
