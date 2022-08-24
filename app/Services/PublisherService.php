@@ -3,6 +3,8 @@ namespace App\Services;
 use App\Models\Creator;
 use App\Models\Listen;
 use App\Models\User;
+use App\Models\AudioFile;
+use Illuminate\Support\Carbon;
 
 class PublisherService{
     public static function get(){
@@ -26,13 +28,13 @@ class PublisherService{
     }
 
     public static function getTrendingPublishers(){
-        $listens = Listen::select('audio_file_id', 'user_id')
-                    ->groupBy('audio_file_id')
-                    ->get();
+
+        $pubs = Creator::select('firstname', 'lastname', 'profile_pic', 'logo', 'public_name')->withCount('listens')->orderByDesc('listens_count');
+
         return json_encode([
             'status'    => 'success',
             'message'   => 'publishers selection successful',
-            "data"      =>  $listens
+            "data"      =>  $pubs->paginate(10)
 
         ]);
     }

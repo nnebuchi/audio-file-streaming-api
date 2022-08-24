@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Carbon;
 
 class Creator extends Authenticatable
 {
@@ -21,6 +22,12 @@ class Creator extends Authenticatable
     ];
 
     public function audioFiles(){
-        return $this->hasMany(Creator::class);
+        return $this->hasMany(AudioFile::class);
     }
+
+    public function listens(){
+        return $this->hasManyThrough(Listen::class, AudioFile::class);
+    }
+
+   
 }
