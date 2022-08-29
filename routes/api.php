@@ -7,6 +7,7 @@ use App\Http\Controllers\UserApiController;
 use App\Http\Controllers\PublishersController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\PaystackController;
+use App\Http\Controllers\TagController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -51,6 +52,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/play', [FileController::class, 'play']);
         Route::post('/toggle-favourites', [FileController::class, 'toggleFavourites']);
         Route::get('/{slug}', [FileController::class, 'getSingleFile']);
+    });
+
+    Route::group(['prefix' => 'tags'], function () {
+        Route::get('/', [TagController::class, 'all']);
     });
 });
 

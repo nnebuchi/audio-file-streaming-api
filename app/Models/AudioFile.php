@@ -16,4 +16,9 @@ class AudioFile extends Model
     public function listens() {
         return $this->hasMany(Listen::class);
     }
+
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
+    }
 }

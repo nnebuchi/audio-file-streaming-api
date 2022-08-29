@@ -3,6 +3,7 @@
 namespace app\Services;
 use App\Models\AudioFile;
 use App\Models\Listen;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
@@ -12,10 +13,21 @@ class FileService{
     public static function getFiles($request){
         // $files = AudioFile::select('title','title')::with('creator')->where('visible', '1');
         // $files = AudioFile::select('title', 'file')->where('visible', '1')->with('creator:firstname');
-        $files = AudioFile::select('id', 'slug', 'title', 'file', 'cover_photo', 'creator_id')
-        ->with(array('creator'=>function($query){
-            $query->select('id', 'firstname','lastname');
-        }));
+        if($request->tag){
+            $tag = Tag::where('name', $request->tag)->first();
+            if($tag){
+                $files = $tag->audio_files()->select('id', 'slug', 'title', 'file', 'cover_photo', 'creator_id')
+                ->with(array('creator'=>function($query){
+                    $query->select('id', 'firstname','lastname');
+                }));
+            }
+        }else{
+            $files = AudioFile::select('id', 'slug', 'title', 'file', 'cover_photo', 'creator_id')
+            ->with(array('creator'=>function($query){
+                $query->select('id', 'firstname','lastname');
+            }));
+        }
+        
         // Post::select('id','title','user_id')->with('user:id,username')->get();
         // $files = AudioFile::with(['creator' => function ($query) {
         //     $query->select(['firstname', 'lastname']);
@@ -49,6 +61,8 @@ class FileService{
         if($request->order_listens){
             $files->withCount('listens')->orderByDesc('listens_count');
         }
+
+        
 
         // if($request->latest){
         //     $files =$files->latest();
