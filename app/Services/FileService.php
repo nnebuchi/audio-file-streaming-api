@@ -16,10 +16,22 @@ class FileService{
         if($request->tag){
             $tag = Tag::where('name', $request->tag)->first();
             if($tag){
-                $files = $tag->audio_files()->select('id', 'slug', 'title', 'file', 'cover_photo', 'creator_id')
+              
+                // $files = $tag->audio_files()->select('id', 'slug', 'title', 'file', 'cover_photo', 'creator_id') ;
+                // ->with(array('creator'=>function($query){
+                //     $query->select('id', 'firstname','lastname');
+                // }))
+
+                $files = AudioFile::select('id', 'slug', 'title', 'file', 'cover_photo', 'creator_id')
                 ->with(array('creator'=>function($query){
                     $query->select('id', 'firstname','lastname');
                 }));
+            }else{
+                return Response::json([
+                    'status'   => 'fail',
+                    'message'  => 'unknown category',
+                    'error'    => 'the category parsed is invalid'
+                ], 200);
             }
         }else{
             $files = AudioFile::select('id', 'slug', 'title', 'file', 'cover_photo', 'creator_id')
