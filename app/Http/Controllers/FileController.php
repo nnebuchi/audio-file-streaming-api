@@ -26,6 +26,11 @@ class FileController extends Controller
         $validator = Validator::make($request->all(),[
             'slug'         => 'required'
         ]);
+
+        if ($validator->fails()) {
+            return returnValidationError($validator->errors(), 'Request failed');
+        }
+
         return FileService::play($request);
     }
 
@@ -35,7 +40,24 @@ class FileController extends Controller
             'slug'         => 'required'
         ]);
 
+        if ($validator->fails()) {
+            return returnValidationError($validator->errors(), 'Request failed');
+        }
+
         return FileService::toggleFavourites(sanitize_input($request->slug), $request->user()->id);
+    }
+
+    public function listenedfiles(Request $request){
+
+        $validator = Validator::make($request->all(),[
+            'limit'         => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return returnValidationError($validator->errors(), 'Request failed');
+        }
+
+        return Fileservice::listenedFiles($request);
     }
     
 }

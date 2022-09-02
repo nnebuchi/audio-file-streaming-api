@@ -13,5 +13,9 @@ class Listen extends Model
         return $this->belongsTo(AudioFile::class);
     }
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
    
 }

@@ -89,6 +89,20 @@ class FileService{
         ], 200);
     }
 
+    public static function listenedFiles($request){
+
+        $files = AudioFile::whereHas('listens', function($query) use($request) {
+            $query->whereUserId($request->user()->id);
+        })->limit($request->limit)->select('id', 'slug', 'title', 'file', 'creator_id')
+        ->with(array('creator'=>function($query){
+            $query->select('id', 'firstname','lastname');
+        }))->get();
+
+
+        return $files;
+        // return $request->user()->listenedFiles()->limit($request->limit)->get();
+    }
+
     public static function getSingleFile($request){
         $file = AudioFile::where('slug', sanitize_input($request->slug))->first();
         
