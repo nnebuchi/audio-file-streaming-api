@@ -89,17 +89,41 @@ class FileService{
         ], 200);
     }
 
+    // public static function listenedFiles($request){
+
+    //     $files = AudioFile::whereHas('listens', function($query) use($request) {
+    //         $query->whereUserId($request->user()->id);
+    //     })->limit($request->limit)->select('id', 'slug', 'title', 'file', 'creator_id')
+    //     ->with(array('creator'=>function($query){
+    //         $query->select('id', 'firstname','lastname');
+    //     }))->get();
+
+
+    //     return $files;
+    // }
+
     public static function listenedFiles($request){
 
-        $files = AudioFile::whereHas('listens', function($query) use($request) {
-            $query->whereUserId($request->user()->id);
-        })->limit($request->limit)->select('id', 'slug', 'title', 'file', 'creator_id')
-        ->with(array('creator'=>function($query){
-            $query->select('id', 'firstname','lastname');
-        }))->get();
+        $files = DB::table('audio_files')
+       
+        
+        ->limit($request->limit)
+        
+        ->join('listens', 'listens.audio_file_id', '=', 'audio_files.id')->orderBy('listens.created_at', 'desc')
 
+        ->join('creators', 'creators.id','=', 'audio_files.creator_id')
 
-        return $files;
+        ->select('audio_files.id as id', 'audio_files.slug as slug', 'audio_files.title as title', 'audio_files.file as file', 'audio_files.creator_id as creator_id', 'creators.firstname as firstname', 'creators.lastname as lastname', 'listens.created_at as created_at')
+        
+        ->orderBy('created_at', 'desc')
+        
+        ->get();
+
+        return Response::json([
+            'status'=>'success',
+            'message'   =>'File fetched',
+            'data'=>$files
+        ], 200);
         // return $request->user()->listenedFiles()->limit($request->limit)->get();
     }
 
