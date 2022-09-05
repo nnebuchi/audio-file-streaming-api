@@ -30,8 +30,8 @@ class PublisherService{
     }
 
     public static function getTrendingPublishers(){
-
-        $pubs = Creator::select('id', 'firstname', 'lastname', 'profile_pic', 'logo', 'public_name')->withCount('listens')->orderByDesc('listens_count');
+        //  This endpoint needs to be modified to tech based on specific date range
+        $pubs = Creator::select('id', 'firstname', 'lastname', 'profile_pic', 'cover_photo', 'public_name')->withCount('listens')->orderByDesc('listens_count');
 
 
         return Response::json([
