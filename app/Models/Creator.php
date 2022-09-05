@@ -30,7 +30,7 @@ class Creator extends Authenticatable
     }
 
     public function latest_release(){
-        return $this->hasMany(AudioFile::class)->latest()->limit(2);
+        return $this->hasMany(AudioFile::class)->latest()->limit(7);
     }
 
    
