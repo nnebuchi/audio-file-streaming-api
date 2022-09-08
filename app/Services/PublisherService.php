@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\AudioFile;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 
 class PublisherService{
     public static function get(){
@@ -39,11 +40,22 @@ class PublisherService{
         //     ->select('creators.firstname', 'creators.lastname', 'creators.profile_pic', 'creators.logo', 'creators.public_name');
            
 
-        return json_encode([
+        return Response::json([
             'status'    => 'success',
             'message'   => 'publishers selection successful',
             "data"      =>  $pubs->paginate(10)
 
-        ]);
+        ], 200);
+    }
+
+    public static function getPublisherData($request){
+        $publisher = Creator::where('id', sanitize_input($request->id))
+        ->with('latest_release');
+
+        return Response::json([
+            'status'    => 'success',
+            'message'   => 'publishers data fetched',
+            "data"      =>  $publisher->first()
+        ], 200);
     }
 }

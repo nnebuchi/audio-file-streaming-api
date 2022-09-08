@@ -26,4 +26,17 @@ class PublishersController extends Controller
     public function getTrendingPublishers(){
         return PublisherService::getTrendingPublishers();
     }
+
+    public function getPublisherData(Request $request){
+        // $validator = Validator::make($request->all(),[
+        //     'publisher_id'         => 'required',
+        //     'limit'                => 'required|numeric'
+        // ]);
+
+        // if ($validator->fails()) {
+        //     return returnValidationError($validator->errors(), 'Request failed');
+        // }
+
+        return PublisherService::getPublisherData($request);
+    }
 }

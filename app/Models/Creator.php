@@ -29,5 +29,9 @@ class Creator extends Authenticatable
         return $this->hasManyThrough(Listen::class, AudioFile::class);
     }
 
+    public function latest_release(){
+        return $this->hasMany(AudioFile::class)->latest()->limit(2);
+    }
+
    
 }
