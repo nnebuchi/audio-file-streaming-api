@@ -48,6 +48,8 @@ class FileService{
         if($request->publisher_id){
             $files = $files->where('creator_id', sanitize_input($request->publisher_id));
         }
+        
+        
 
         if($request->publishers && $request->publishers == 'my-pick'){
             
@@ -74,15 +76,14 @@ class FileService{
             $files->withCount('listens')->orderByDesc('listens_count');
         }
 
-        
 
-        // if($request->latest){
-        //     $files =$files->latest();
-        // }
-
+        if($request->limit){
+            $files = $request->publishers && $request->randomise ? $files->limit(50)->get() : $files->limit($request->limit)->get();
         
-        $files = $request->publishers && $request->randomise ? $files->limit(50)->get() : $files->paginate(50);
-        
+        }else{ 
+             $files = $request->publishers && $request->randomise ? $files->limit(50)->get() : $files->paginate(50);
+        }
+       
         return Response::json([
             'status'    => 'success',
             'data'  => $files,
