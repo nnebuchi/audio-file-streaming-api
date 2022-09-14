@@ -86,6 +86,10 @@ class FileService{
             $files->withCount('listens')->orderByDesc('listens_count');
         }
 
+        if($request->favourites){
+            $files->whereIn('slug', json_decode($request->user()->favourites, true));
+        }
+
 
         if($request->limit){
             $files = $request->publishers && $request->randomise ? $files->limit(50)->get() : $files->limit($request->limit)->get();
