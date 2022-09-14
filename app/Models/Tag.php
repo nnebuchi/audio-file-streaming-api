@@ -11,6 +11,6 @@ class Tag extends Model
 
     public function audio_files()
     {
-        return $this->morphedByMany(AudioFile::class, 'taggable');
+        return $this->belongsToMany(AudioFile::class);
     }
 }

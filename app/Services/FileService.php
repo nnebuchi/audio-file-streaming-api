@@ -22,7 +22,15 @@ class FileService{
                 //     $query->select('id', 'firstname','lastname');
                 // }))
 
+                // $files = AudioFile::select('id', 'slug', 'title', 'file', 'cover_photo', 'creator_id')
+                // ->with(array('creator'=>function($query){
+                //     $query->select('id', 'firstname','lastname');
+                // }));
+
                 $files = AudioFile::select('id', 'slug', 'title', 'file', 'cover_photo', 'creator_id')
+                ->whereHas('tags', function ($q) use($tag) {
+                    return $q->whereIn('name', $tag); 
+                })
                 ->with(array('creator'=>function($query){
                     $query->select('id', 'firstname','lastname');
                 }));
@@ -33,6 +41,8 @@ class FileService{
                     'error'    => 'the category parsed is invalid'
                 ], 200);
             }
+
+            
         }else{
             $files = AudioFile::select('id', 'slug', 'title', 'file', 'cover_photo', 'creator_id')
             ->with(array('creator'=>function($query){
