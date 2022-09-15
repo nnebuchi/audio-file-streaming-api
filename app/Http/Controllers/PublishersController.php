@@ -23,6 +23,16 @@ class PublishersController extends Controller
         return PublisherService::select(sanitize_input($request->publishers), $request->user()->id);
     }
 
+    public function toggleFollow(Request $request){
+        $validator = Validator::make($request->all(),[
+            'publisher_id'         => 'required'
+        ]);
+        if ($validator->fails()) {
+            return returnValidationError($validator->errors(), 'Selecting publishers failed');
+        }
+        return PublisherService::toggleFollow(sanitize_input($request->publisher_id), $request->user()->id);
+    }
+
     public function getTrendingPublishers(){
         return PublisherService::getTrendingPublishers();
     }
