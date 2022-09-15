@@ -18,7 +18,7 @@ class TagService{
         return Response::json([
             "status"    =>  "success",
             "message"   =>  "tags fetched",
-            "data"     =>   $tags 
+            "data"     =>   $tags->get() 
         ], 200);
 
     }
