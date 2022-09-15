@@ -6,6 +6,7 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\Services\TagService;
+use Illuminate\Support\Facades\Validator;
 
 class TagController extends Controller
 {
@@ -19,7 +20,9 @@ class TagController extends Controller
     }
 
     public function getPublisherTags(Request $request){
-
+        $validator = Validator::make($request->all(),[
+            'publisher_id'         => 'required'
+        ]);
         return TagService::getPublisherTags($request);
 
         

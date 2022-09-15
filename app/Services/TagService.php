@@ -11,7 +11,7 @@ class TagService{
 
         ->whereHas('audio_files', function ($q) use($request) {
 
-            return $q->whereIn('creator_id', $request->user()->id);
+            return $q->whereIn('creator_id', $request->publisher_id);
 
         });
 

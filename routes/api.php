@@ -59,7 +59,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::group(['prefix' => 'tags'], function () {
         Route::get('/', [TagController::class, 'all']);
-        Route::get('/publisher-tags', [TagController::class, 'getPublisherTags']);
+        Route::post('/publisher-tags', [TagController::class, 'getPublisherTags']);
     });
 });
 
