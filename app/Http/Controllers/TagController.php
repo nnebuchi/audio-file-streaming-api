@@ -23,6 +23,9 @@ class TagController extends Controller
         $validator = Validator::make($request->all(),[
             'publisher_id'         => 'required'
         ]);
+        if ($validator->fails()) {
+            return returnValidationError($validator->errors(), 'Request failed');
+        }
         return TagService::getPublisherTags($request);
 
         
