@@ -63,9 +63,9 @@ class PublisherService{
             $user->save();
     
             return json_encode([
-                'status'        =>'success',
-                'message'       =>'success',
-                'favourites'    =>$user->publishers_ids
+                'status'        => 'success',
+                'message'       => 'success',
+                'followings'    => $user->publishers_ids
             ]);
         }
     public static function getTrendingPublishers(){
