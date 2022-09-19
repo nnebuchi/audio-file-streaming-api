@@ -8,6 +8,7 @@ use App\Http\Controllers\PublishersController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\PaystackController;
 use App\Http\Controllers\TagController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -62,6 +63,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/', [TagController::class, 'all']);
         Route::post('/publisher-tags', [TagController::class, 'getPublisherTags']);
     });
+
+    Route::group(['prefix' => 'users'], function () {
+        Route::get('/self', [UserApiController::class, 'getDetail']);
+    });
+    
 });
 
 

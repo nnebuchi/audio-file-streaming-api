@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Support\Facades\Response;
 
 class UserApiController extends Controller
 {
+    function getDetail(Request $request){
+        return UserService::getDetail($request);
+    }
     function fetchUsers(Request $request){
         $users = User::all();
         return Response::json(
