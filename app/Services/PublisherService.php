@@ -9,12 +9,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 
 class PublisherService{
-    public static function get(){
+    public static function get($request){
         // $publishers = Creator::all();
         return json_encode([
             'status'    => 'success',
             'message'   => 'publishers fetched successfully',
-            'data'      =>  Creator::all()
+            'data'      =>  Creator::all(),
+            'users_publishers_ids'=>$request->user()->publisers_ids
         ]);
     }
 
