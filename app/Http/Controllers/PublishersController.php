@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Validator;
 
 class PublishersController extends Controller
 {
-    public function get(){
-        return PublisherService::get();
+    public function get(Request $request){
+        return PublisherService::get($request);
     }
 
     public function select(Request $request){
