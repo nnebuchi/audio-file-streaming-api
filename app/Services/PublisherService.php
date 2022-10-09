@@ -31,44 +31,52 @@ class PublisherService{
     }
 
     public static function toggleFollow(string $publisher_id, string $user_id){
-            // $user = User::where('id', $user_id)->first();
-            // $user->publishers_ids = $publishers_ids;
-            // $user->save();
-            // return json_encode([
-            //     'status'    => 'success',
-            //     'message'   => 'publishers selection successful',
-            //     "data"      =>  $user->publishers_ids
-            // ]);
+        // $user = User::where('id', $user_id)->first();
+        // $user->publishers_ids = $publishers_ids;
+        // $user->save();
+        // return json_encode([
+        //     'status'    => 'success',
+        //     'message'   => 'publishers selection successful',
+        //     "data"      =>  $user->publishers_ids
+        // ]);
 
 
-            // if(!$user){
-            //     return json_encode([
-            //         'status'    =>'fail',
-            //         'message'   =>'User not found',
-            //         'error'      =>'unathorised access'
-            //     ]);
-            // }
-            $user = User::where('id', $user_id)->first();
-            // retrieve existing favoutites and explode it
-            $publishersPick = json_decode($user->publishers_ids, true);
-    
-            if(in_array($publisher_id, $publishersPick)){
-                $key = array_search($publisher_id, $publishersPick);
-                unset($publishersPick[$key]);
-            }else{
-                array_push($publishersPick, $publisher_id);
-            }
-    
-            $user->publishers_ids = $publishersPick;
-    
-            $user->save();
-    
+        // if(!$user){
+        //     return json_encode([
+        //         'status'    =>'fail',
+        //         'message'   =>'User not found',
+        //         'error'      =>'unathorised access'
+        //     ]);
+        // }
+        $user = User::where('id', $user_id)->first();
+        if(!$user){
             return json_encode([
-                'status'        => 'success',
-                'message'       => 'success',
-                'followings'    => $user->publishers_ids
+                'status'    =>'fail',
+                'message'   =>'User not found',
+                'error'      =>'unathorised access'
             ]);
         }
+        // retrieve existing publishersist and explode it
+        $publishersPick = json_decode($user->publishers_ids, true);
+
+        if(in_array($publisher_id, $publishersPick)){
+            $key = array_search($publisher_id, $publishersPick);
+            unset($publishersPick[$key]);
+        }else{
+            array_push($publishersPick, $publisher_id);
+        }
+
+        $user->publishers_ids = $publishersPick;
+
+        $user->save();
+
+        return json_encode([
+            'status'        => 'success',
+            'message'       => 'success',
+            'followings'    =>$user->publishers_ids
+        ]);
+    }
+
     public static function getTrendingPublishers(){
         //  This endpoint needs to be modified to tech based on specific date range
         $pubs = Creator::select('id', 'firstname', 'lastname', 'profile_pic', 'cover_photo', 'public_name', 'about_ministry')->withCount('listens')->orderByDesc('listens_count');
