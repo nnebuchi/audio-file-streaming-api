@@ -75,6 +75,7 @@ class AuthService
         $user = User::where('email', $email)->first();
         $token = $user->createToken('auth_token')->plainTextToken;
         $user->favourites = json_decode($user->favourites);
+        $user->publishers_ids = json_decode($user->publishers_ids);
         return json_encode([
             'status'        => 'success',
             'message'       => 'successful',
