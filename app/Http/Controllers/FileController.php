@@ -72,3 +72,4 @@ class FileController extends Controller
 
         return Fileservice::search($request->query);
     }
+}
