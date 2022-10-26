@@ -59,5 +59,16 @@ class FileController extends Controller
 
         return Fileservice::listenedFiles($request);
     }
-    
-}
+
+    public function search(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'query'         => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return returnValidationError($validator->errors(), 'Request failed');
+        }
+
+        return Fileservice::search($request->query);
+    }

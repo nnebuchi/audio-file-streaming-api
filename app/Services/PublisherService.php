@@ -70,11 +70,11 @@ class PublisherService{
 
         $user->save();
 
-        return json_encode([
+        return Response::json([
             'status'        => 'success',
             'message'       => 'success',
             'followings'    =>$user->publishers_ids
-        ]);
+        ], 200);
     }
 
     public static function getTrendingPublishers(){

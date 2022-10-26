@@ -56,7 +56,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/toggle-favourites', [FileController::class, 'toggleFavourites']);
         Route::get('/{slug}', [FileController::class, 'getSingleFile']);
         Route::post('/listens', [FileController::class, 'listenedfiles']);
-        
+        Route::post('/search', [FileController::class, 'search']);
     });
 
     Route::group(['prefix' => 'tags'], function () {

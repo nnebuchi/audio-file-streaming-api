@@ -218,4 +218,24 @@ class FileService{
             'favourites'    =>$user->favourites
         ]);
     }
+
+    public function search($query){
+
+        $files = AudioFile::select('id', 'slug', 'title', 'file', 'cover_photo', 'creator_id')
+            ->with(array('creator'=>function($q) {
+                $q->select('id', 'firstname','lastname');
+            }))
+            ->where('title', 'like', '%'.$query.'%')
+
+            ->orWhereHas('creator', function($q) use ($query){
+                $q->where('firstname', 'like', '%'.$query.'%')->orWhere('lastname', 'like', '%'.$query.'%');
+            })
+            ->get();
+
+            return Response::json([
+                'status'=>'success',
+                'message'=>'file search successful',
+                'results'=>$files
+            ], 200);
+    }
 }
