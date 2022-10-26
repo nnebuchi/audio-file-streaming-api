@@ -62,6 +62,7 @@ class FileController extends Controller
 
     public function search(Request $request)
     {
+        return $request;
         $validator = Validator::make($request->all(),[
             'queryString'         => 'required'
         ]);
