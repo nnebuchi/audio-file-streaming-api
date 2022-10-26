@@ -219,7 +219,7 @@ class FileService{
         ]);
     }
 
-    public function search($query){
+    public static function search($query){
 
         $files = AudioFile::select('id', 'slug', 'title', 'file', 'cover_photo', 'creator_id')
             ->with(array('creator'=>function($q) {

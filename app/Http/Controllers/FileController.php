@@ -63,13 +63,13 @@ class FileController extends Controller
     public function search(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'query'         => 'required'
+            'queryString'         => 'required'
         ]);
 
         if ($validator->fails()) {
             return returnValidationError($validator->errors(), 'Request failed');
         }
 
-        return Fileservice::search($request->query);
+        return Fileservice::search($request->queryString);
     }
 }
