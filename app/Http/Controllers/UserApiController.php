@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
-use app\Services\FileService;
+use App\Services\FileService;
 
 class UserApiController extends Controller
 {
