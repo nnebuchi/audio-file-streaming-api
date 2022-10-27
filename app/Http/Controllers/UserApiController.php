@@ -56,7 +56,7 @@ class UserApiController extends Controller
             return returnValidationError($validator->errors(), 'Upload failed');
         }
 
-        $uploadedFile = FileService::upload($request, 'profile_photo', 'central_storage', 'users_profile_photos');
+        $uploadedFile =UserService::uploadProfilePhoto($request);
         return UserService::updateProfilePhoto($uploadedFile, $request->user()->id);
     }
 

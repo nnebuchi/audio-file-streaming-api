@@ -43,20 +43,33 @@ class UserService
         );
     }
 
+    public static function uploadProfilePhoto($request){
+        $user = User::where('id', $request->user()->id)->first();
+        if(!$user){
+            return Response::json([
+                'status'    =>'fail',
+                'message'   =>'user not found',
+                'error'   =>'user not found'
+            ]);
+        }
+        return  FileService::upload($request, 'profile_photo', 'central_storage', 'users_profile_photos', $user->profile_photo);
+    }
+
     public static function updateProfilePhoto($fileName, $userId){
         $user = User::where('id', $userId)->first();
         if(is_null($user)){
             return json_encode([
                 'status'    =>'fail',
                 'message'   =>'user not found',
-                'message'   =>'user not found'
+                'error'   =>'user not found'
             ]);
         }
         $user->profile_photo = $fileName;
         $user->save();
-        return json_encode([
+        return Response::json([
             'status'    =>'success',
-            'message'   =>'profile photo updated'
+            'message'   =>'profile photo updated',
+            'file'=>asset('storage/'.$user->profile_photo)
         ]);
     }
 
