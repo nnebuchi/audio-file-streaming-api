@@ -17,7 +17,7 @@ class UserService
         ], 200);
     }
 
-    public static function updateContactProfile($request){
+    public static function updateDetail($request){
 
         $user = User::where('id', $request->user()->id)->first();
         if(!$user){

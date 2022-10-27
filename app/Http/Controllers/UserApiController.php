@@ -35,14 +35,14 @@ class UserApiController extends Controller
         ]);
     }
 
-    public function updateContactProfile(Request $request){
+    public function updateDetail(Request $request){
         $validator = Validator::make($request->all(),[
             'display_name'  => 'required'
         ]);
         if ($validator->fails()) {
             return returnValidationError($validator->errors(), 'Selecting publishers failed');
         }
-        return UserService::updateContactProfile($request);
+        return UserService::updateDetail($request);
     }
 
 }
