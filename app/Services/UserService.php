@@ -34,12 +34,12 @@ class UserService
         
         $user->save();
         
-        return json_encode(
+        return Response::json(
             [
                 "status"    =>"success",
                 "message"   =>"Profile updated",
                 "data"      =>$user
-            ]
+            ], 200
         );
     }
 
