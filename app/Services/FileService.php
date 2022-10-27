@@ -7,6 +7,7 @@ use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 
 class FileService{
 
@@ -237,5 +238,25 @@ class FileService{
                 'message'=>'file search successful',
                 'results'=>$files
             ], 200);
+    }
+
+    public static function upload($request, $fileName, $disk, $directory, $oldFile=null){
+        if ($request->hasFile($fileName)) {
+            if(!is_null($oldFile)){
+                if (Storage::disk($disk)->exists($oldFile) ) {
+                    Storage::disk($disk)->delete($oldFile);
+                }  
+            }
+            
+            $uploadFile       = $request->$fileName;
+            $uploadFileName   = $uploadFile->getClientOriginalName();
+            $uploadFileExt    = $uploadFile->getClientOriginalExtension();
+            $uploadFileName   = pathinfo(preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '_', $uploadFileName)), PATHINFO_FILENAME);
+            $uploadFileToDb   = $uploadFileName . '_' . time() . '.' . $uploadFileExt;
+            $uploadFile->storeAs($directory, $uploadFileToDb, $disk);
+            
+            return $directory.'/'.$uploadFileToDb;
+            
+        }
     }
 }

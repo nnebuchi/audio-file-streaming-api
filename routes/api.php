@@ -67,6 +67,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::group(['prefix' => 'users'], function () {
         Route::get('/self', [UserApiController::class, 'getDetail']);
         Route::post('/update', [UserApiController::class, 'updateDetail']);
+        Route::post('/upload-profile-photo', [UserApiController::class, 'uploadProfilePhoto']);
+
     });
     
 });

@@ -43,4 +43,21 @@ class UserService
         );
     }
 
+    public static function updateProfilePhoto($fileName, $userId){
+        $user = User::where('id', $userId)->first();
+        if(is_null($user)){
+            return json_encode([
+                'status'    =>'fail',
+                'message'   =>'user not found',
+                'message'   =>'user not found'
+            ]);
+        }
+        $user->profile_photo = $fileName;
+        $user->save();
+        return json_encode([
+            'status'    =>'success',
+            'message'   =>'profile photo updated'
+        ]);
+    }
+
 }

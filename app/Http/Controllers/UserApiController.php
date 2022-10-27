@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
+use app\Services\FileService;
 
 class UserApiController extends Controller
 {
@@ -43,6 +44,20 @@ class UserApiController extends Controller
             return returnValidationError($validator->errors(), 'Selecting publishers failed');
         }
         return UserService::updateDetail($request);
+    }
+
+    public function uploadProfilePhoto(Request $request){
+        $validator = Validator::make($request->all(),[
+            'profile_photo' => 'required|mimes:jpeg,jpg,png|max:2048'
+            
+        ]);
+
+        if ($validator->fails()) {
+            return returnValidationError($validator->errors(), 'Upload failed');
+        }
+
+        $uploadedFile = FileService::upload($request, 'profile_photo', 'central_storage', 'users_profile_photos');
+        return UserService::updateProfilePhoto($uploadedFile, $request->user()->id);
     }
 
 }
