@@ -17,4 +17,29 @@ class UserService
         ], 200);
     }
 
+    public static function updateContactProfile($request){
+
+        $user = User::where('id', $request->user()->id)->first();
+        if(!$user){
+            return Response::json(
+                [
+                    "status"    =>"fail",
+                    "message"   =>"unauthorised access",
+                    "error"     =>"you do not have the permission to uodate this content"     
+                ], 401
+            );
+        }
+        
+            $user->username = sanitize_input($request->display_name);
+        
+        $user->save();
+
+        return json_encode(
+            [
+                "status"    =>"success",
+                "message"   =>"Profile updated"   
+            ]
+        );
+    }
+
 }

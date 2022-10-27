@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 
 class UserApiController extends Controller
 {
@@ -32,6 +33,16 @@ class UserApiController extends Controller
             'message'=>'user updated',
             'users' =>User::all()
         ]);
+    }
+
+    public function updateContactProfile(Request $request){
+        $validator = Validator::make($request->all(),[
+            'display_name'  => 'required'
+        ]);
+        if ($validator->fails()) {
+            return returnValidationError($validator->errors(), 'Selecting publishers failed');
+        }
+        return UserService::updateContactProfile($request);
     }
 
 }

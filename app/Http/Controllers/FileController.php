@@ -71,6 +71,6 @@ class FileController extends Controller
             return returnValidationError($validator->errors(), 'Request failed');
         }
 
-        return Fileservice::search($request->queryString);
+        return Fileservice::search(sanitize_input($request->queryString));
     }
 }
