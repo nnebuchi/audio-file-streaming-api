@@ -33,11 +33,12 @@ class UserService
             $user->username = sanitize_input($request->display_name);
         
         $user->save();
-
+        
         return json_encode(
             [
                 "status"    =>"success",
-                "message"   =>"Profile updated"   
+                "message"   =>"Profile updated",
+                "data"      =>$user
             ]
         );
     }
