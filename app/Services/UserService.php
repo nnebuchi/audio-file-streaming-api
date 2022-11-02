@@ -69,7 +69,7 @@ class UserService
         return Response::json([
             'status'    =>'success',
             'message'   =>'profile photo updated',
-            'file'=>asset('storage/'.$user->profile_photo)
+            'file'=>$user->profile_photo
         ]);
     }
 
