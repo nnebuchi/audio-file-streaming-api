@@ -92,7 +92,7 @@ class PublisherService{
 
     public static function getPublisherData($request){
         $publisher = Creator::where('id', sanitize_input($request->id))
-        ->with('latest_release');
+        ->with('latest_release')->withCount('listens');
 
         return Response::json([
             'status'    => 'success',
