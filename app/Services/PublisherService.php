@@ -23,15 +23,15 @@ class PublisherService{
         $user = User::where('id', $user_id)->first();
         $user->publishers_ids = $publishers_ids;
         $user->save();
-        return json_encode([
+        return Response::json([
             'status'    => 'success',
             'message'   => 'publishers selection successful',
             "data"      =>  $user->publishers_ids
-        ]);
+        ], 200);
     }
 
     public static function toggleFollow(string $publisher_id, string $user_id){
-        return  $publisher_id;
+        // return  $publisher_id;
         // $user = User::where('id', $user_id)->first();
         // $user->publishers_ids = $publishers_ids;
         // $user->save();
@@ -71,11 +71,12 @@ class PublisherService{
 
         $user->save();
 
-        return Response::json([
+        return json_encode([
             'status'        => 'success',
             'message'       => 'success',
             'followings'    =>$user->publishers_ids
-        ], 200);
+        ]);
+        
     }
 
     public static function getTrendingPublishers(){
