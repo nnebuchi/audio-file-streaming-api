@@ -31,6 +31,7 @@ class PublisherService{
     }
 
     public static function toggleFollow(string $publisher_id, string $user_id){
+        return  $publisher_id;
         // $user = User::where('id', $user_id)->first();
         // $user->publishers_ids = $publishers_ids;
         // $user->save();
