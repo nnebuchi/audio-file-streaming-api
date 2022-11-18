@@ -537,7 +537,7 @@ img {
     font-size: 35px;
     font-weight: 750;
     text-transform: uppercase;
-    text-shadow: 0px 2px 5px rgba(0, 59, 93, 0.714);
+    text-shadow: 0px 2px 5px rgba(0, 59, 93, 0.714); 
     /* font-family: var(--Hero-font-bold); */
     /* padding-top: 200px; */
 }

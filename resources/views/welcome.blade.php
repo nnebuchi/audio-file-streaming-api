@@ -13,12 +13,13 @@
                             The entrance of thy words giveth <span class="auto-input"></span>
                         </div>
                         <p class="hero-paragraph d-md-block d-none">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eum natus, minus dolores hic expedita vel inventore magnam i </p>
-                        <div class="row ">
+                        <div class="row mt-5">
                             <div class="hero-button mt-5 col-6">
-                                <a href="#mobile-app-section" class="wb-btn dark-btn large-btn primary-shadow">Download App <i class="bi bi-arrow-down"></i></a>
+                                <a href="#mobile-app-section" class="wb-btn dark-btn large-btn primary-shadow">Download App <i class="d-none d-sm-block bi bi-arrow-down"></i></a>
+                                
                             </div>
                             <div class="mt-5 col-6 hero-button">
-                                <a href="#" class="wb-btn primary-btn large-btn primary-shadow">Ministers Login <i class="bi bi-arrow-right"></i></a>
+                                <a href="#" class="wb-btn primary-btn large-btn primary-shadow">Ministers Login <i class="d-none d-sm-block bi bi-arrow-right"></i></a>
                             </div>
                         </div>
                         

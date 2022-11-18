@@ -4,7 +4,7 @@
     @include('layouts.front.head')
 </head>
 <body>
-    @include('layouts.front.preloader')
+    {{-- @include('layouts.front.preloader') --}}
 
     @include('layouts.front.navbar')
     

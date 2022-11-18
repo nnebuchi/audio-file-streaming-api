@@ -375,3 +375,22 @@
             border-radius: 5px;
         }
     }
+
+    @media only screen and (max-width: 576px){
+        .large-btn{
+            font-size: 15px!important;
+            padding: 15px 19px!important;
+        }
+        .hero-title{
+            height: 60px;
+        }
+        
+    }
+
+    @media only screen and (max-width: 350px){
+        .large-btn{
+            font-size: 13px!important;
+            padding: 10px 15px!important;
+        }
+        
+    }
