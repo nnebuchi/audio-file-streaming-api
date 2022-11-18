@@ -1,0 +1,377 @@
+    /* @media screen and (max-width: 767px) {
+    
+} */
+    /* Extra small devices (phones, 600px and down) */
+    /* @media only screen and (min-width: 360px) {
+    .hero-background-img-sm img {
+        position: relative;
+        bottom: -55px!important;
+    }
+} */
+    
+    @media only screen and (max-width: 600px) {
+        .hero-background-img img {
+            display: none!important;
+        }
+        .hero-word-bank-img img {
+            margin: 0 auto;
+            width: 150px;
+            display: flex;
+            justify-content: center;
+        }
+        .hero-title {
+            text-align: center;
+            font-size: 25px;
+        }
+        .hero-button {
+            text-align: center;
+        }
+        .hero-container {
+            margin-top: -50px!important;
+        }
+        .hero-background-img-sm img {
+            width: 350px!important;
+            position: relative;
+            bottom: -38px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .hero-background-img-sm {
+            display: flex;
+            justify-content: center;
+        }
+        .hero-paragraph {
+            display: none;
+        }
+        .features-container .features-title {
+            font-size: 20px;
+            text-align: center;
+        }
+        .mobile-app-desc .mobile-app-heading {
+            font-size: 20px;
+            text-align: center;
+        }
+        .mobile-app-desc .mobile-app-p {
+            font-size: 20px!important;
+            text-align: center;
+        }
+        .ios-img img,
+        .playstore-img img {
+            width: 200px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin: 5px auto;
+        }
+        .contact-brief {
+            font-size: 15px;
+            text-align: center;
+        }
+        .contact-address {
+            font-size: 15px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        .contact-phone {
+            font-size: 15px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        .contact-email {
+            font-size: 15px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        .contact-address i,
+        .contact-phone i,
+        .contact-email i {
+            color: #fff;
+            background: var(--primary-bold);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        /* footer settings  */
+        .footer-logo img {
+            width: 200px;
+        }
+        .ios-responsive img {
+            display: flex;
+            justify-content: flex-start!important;
+            width: 200px;
+        }
+        .playstore-responsive img {
+            display: flex;
+            justify-content: flex-start!important;
+            width: 200px;
+        }
+        /* footer settings end */
+        .login-title {
+            font-size: 25px!important;
+        }
+        .login-text-container {
+            margin-bottom: 50px;
+            margin-top: 40px;
+        }
+    }
+    /* Small devices (portrait tablets and large phones, 600px and up) */
+    
+    @media only screen and (min-width: 600px) {
+        .hero-background-img img {
+            display: none;
+        }
+        .hero-word-bank-img img {
+            margin: 0 auto;
+            width: 150px;
+            display: flex;
+            justify-content: center;
+        }
+        .hero-title {
+            text-align: center;
+            font-size: 25px;
+        }
+        .hero-button {
+            text-align: center;
+        }
+        .hero-container {
+            margin-top: -50px!important;
+        }
+        .hero-background-img-sm img {
+            width: 350px!important;
+            position: relative;
+            bottom: -38px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .hero-background-img-sm {
+            display: flex;
+            justify-content: center;
+        }
+        /* .hero-paragraph {
+        display: none;
+    } */
+        .features-container .features-title {
+            font-size: 20px;
+            text-align: center;
+        }
+        .mobile-app-desc .mobile-app-heading {
+            font-size: 20px;
+            text-align: center;
+        }
+        .mobile-app-desc .mobile-app-p {
+            font-size: 20px!important;
+            text-align: center;
+        }
+        .ios-img img,
+        .playstore-img img {
+            width: 200px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin: 5px auto;
+        }
+        .contact-brief {
+            font-size: 15px;
+            text-align: center;
+        }
+        .contact-address {
+            font-size: 15px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        .contact-phone {
+            font-size: 15px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        .contact-email {
+            font-size: 15px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        .contact-address i,
+        .contact-phone i,
+        .contact-email i {
+            color: #fff;
+            background: var(--primary-bold);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        /* footer settings  */
+        .footer-logo img {
+            width: 200px;
+        }
+        .ios-responsive img {
+            display: flex;
+            justify-content: flex-start!important;
+            width: 200px;
+        }
+        .playstore-responsive img {
+            display: flex;
+            justify-content: flex-start!important;
+            width: 200px;
+        }
+        /* footer settings end */
+        /* login settings start */
+        .custom-login-bg {
+            display: none;
+        }
+        /* Login settings end */
+    }
+    /* Medium devices (landscape tablets, 768px and up) */
+    
+    @media only screen and (min-width: 768px) {
+        .hero-background-img img {
+            display: block;
+            overflow-x: hidden!important;
+            /* width: 600px; */
+        }
+        .hero-word-bank-img img {
+            margin: 0 auto;
+            width: 200px;
+            display: flex;
+            justify-content: center;
+        }
+        .hero-title {
+            text-align: left;
+            font-size: 25px;
+        }
+        .hero-button {
+            text-align: left;
+        }
+        .hero-container {
+            margin-top: 10px!important;
+        }
+        .hero-background-img-sm img {
+            display: none;
+            width: 350px!important;
+            position: relative;
+            bottom: -38px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .hero-background-img-sm {
+            display: flex;
+            justify-content: center;
+        }
+        /* .hero-paragraph {
+        display: none;
+    } */
+        .features-container .features-title {
+            font-size: 20px;
+            text-align: center;
+        }
+        .mobile-app-desc .mobile-app-heading {
+            font-size: 20px;
+            text-align: center;
+        }
+        .mobile-app-desc .mobile-app-p {
+            font-size: 20px!important;
+            text-align: center;
+        }
+        .ios-img img,
+        .playstore-img img {
+            width: 200px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin: 5px auto;
+        }
+        /* login settings start */
+        .custom-login-bg {
+            display: none;
+        }
+        /* Login settings end */
+    }
+    /* Large devices (laptops/desktops, 992px and up) */
+    
+    @media only screen and (min-width: 992px) {
+        .hero-container {
+            margin-top: 10px!important;
+        }
+        .hero-background-img-sm img {
+            width: 350px!important;
+            position: relative;
+            bottom: -38px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        /* .hero-paragraph {
+        display: none;
+    } */
+        /* login settings start */
+        .custom-login-bg {
+            display: none;
+        }
+        /* Login settings end */
+    }
+    /* Extra large devices (large laptops and desktops, 1200px and up) */
+    
+    @media only screen and (min-width: 1200px) {
+        .hero-container {
+            margin-top: -50px!important;
+        }
+        .hero-word-bank-img img {
+            width: 250px;
+        }
+        .hero-title {
+            text-align: left!important;
+            font-size: 30px;
+        }
+        .hero-button {
+            text-align: left!important;
+        }
+        .hero-word-bank-img img {
+            margin: 0 auto;
+            display: flex;
+            justify-content: start!important;
+        }
+        .hero-paragraph {
+            font-weight: 600;
+            font-size: 19px;
+            color: #042c54;
+        }
+        .mobile-app-mockup img {
+            width: 1000px!important;
+            display: block;
+            float: right;
+        }
+        .features-container .features-title {
+            font-size: 25px;
+        }
+        .mobile-app-desc .mobile-app-heading {
+            font-size: 25px;
+        }
+        .mobile-app-desc .mobile-app-p {
+            font-size: 25px!important;
+        }
+        .ios-img img,
+        .playstore-img img {
+            width: 200px;
+        }
+        .contact-brief {
+            font-size: 18px;
+        }
+        .contact-address {
+            font-size: 18px;
+            padding-top: 25px;
+            padding-bottom: 25px;
+        }
+        .contact-phone {
+            font-size: 18px;
+            padding-top: 25px;
+            padding-bottom: 25px;
+        }
+        .contact-email {
+            font-size: 18px;
+            padding-top: 25px;
+            padding-bottom: 25px;
+        }
+        .contact-address i,
+        .contact-phone i,
+        .contact-email i {
+            color: #fff;
+            background: var(--primary-bold);
+            padding: 10px;
+            border-radius: 5px;
+        }
+    }

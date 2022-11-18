@@ -1,0 +1,58 @@
+:root {
+    --Avenir-black: "Avenir black";
+    --Raleway-regular: "Raleway regular";
+}
+
+@font-face {
+    src: url(./fonts/Avenir-Font/AvenirLTStd-Black.otf);
+    font-family: "Avenir black";
+}
+
+@font-face {
+    src: url(./fonts/Raleway/static/Raleway-Regular.ttf);
+    font-family: "Raleway Regular";
+}
+
+.features-title {
+    font-family: var(--Avenir-black);
+    padding: 100px 0 0 0;
+}
+
+.features-paragraph {
+    text-align: center;
+}
+
+.features-container {
+    padding-bottom: 50px;
+}
+
+.features-title {
+    font-size: 35px;
+    color: #000;
+    font-weight: bold;
+    text-align: center;
+}
+
+.login-text-container {
+    margin-top: 100px;
+}
+
+.login-title {
+    font-size: 35px;
+    color: #000;
+    font-weight: bold;
+    text-align: left;
+}
+
+.login-paragraph {
+    font-size: 30px;
+    text-align: left;
+}
+
+.hero-title {
+    font-family: var(--Avenir-black);
+}
+
+.hero-paragraph {
+    font-family: var(--Raleway-regular);
+}
