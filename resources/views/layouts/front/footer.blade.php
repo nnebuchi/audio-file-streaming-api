@@ -1,7 +1,7 @@
 <footer class="wordbank-footer">
     <div class="container">
         <div class="row">
-            <div class="col-md-3">
+            <div class="mt-2 col-md-3 col-sm-6">
                 <div class="footer-logo">
                     <img src="{{ asset('front_assets/img/logo/word-logo.png') }}" alt="">
                 </div>
@@ -9,7 +9,7 @@
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus impedit sequi pariatur fuga molestiae tempora deserunt tempore vitae aspernatur iure!
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="mt-2 col-md-3 col-6">
                 <h5>Useful Link</h5>
                 <ul class="wordbank-link">
                     <li><a href="#">Home</a></li>
@@ -18,7 +18,7 @@
                     <li><a href="#">Events</a></li>
                 </ul>
             </div>
-            <div class="col-md-3">
+            <div class="mt-2 col-md-3 col-6">
                 <h5>
                     Product help
                 </h5>
@@ -29,7 +29,7 @@
                     <li><a href="#">Contact</a></li>
                 </ul>
             </div>
-            <div class="col-md-3">
+            <div class="mt-2 col-md-3 col-sm-6 ">
                 <h5>
                     Download
                 </h5>

@@ -4,7 +4,7 @@
         <div class="classy-nav-container breakpoint-off">
             <div class="container-fluid">
                 <!-- Menu -->
-                <nav class="classy-navbar justify-content-between" id="newsboxNav">
+                <nav class="classy-navbar justify-content-between sticky-top" id="newsboxNav">
                     <!-- Nav brand -->
                     <a href="index.html" class="nav-brand"><img src="{{ asset('front_assets/img/logo/word-logo.png')}}" alt=""></a>
 
@@ -32,7 +32,7 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="#">International</a>
+                                <li><a href="#">Organisations</a>
                                     <div class="megamenu">
                                         <ul class="single-mega cn-col-4">
                                             <li class="title">Europe</li>
@@ -76,8 +76,8 @@
                                         </ul>
                                     </div>
                                 </li>
-                                <li><a href="#">Local News</a></li>
-                                <li><a href="#">Pages</a>
+                                
+                                <li><a href="#">Topics</a>
                                     <ul class="dropdown">
                                         <li><a href="index.html">Home</a></li>
                                         <li><a href="catagory.html">Catagory</a></li>
@@ -86,7 +86,7 @@
                                         <li><a href="elements.html">Elements</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#">Sport</a>
+                               <li><a href="#">Teachers</a>
                                     <ul class="dropdown">
                                         <li><a href="#">Archery</a></li>
                                         <li><a href="#">Badminton</a></li>
@@ -97,7 +97,8 @@
                                         <li><a href="#">Football</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#">Lifestyle</a></li>
+                                {{--  <li><a href="#">Lifestyle</a></li>
+                                <li><a href="#">Local News</a></li> --}}
                             </ul>
 
                             <!-- Header Add Area -->
