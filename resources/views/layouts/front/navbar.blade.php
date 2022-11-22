@@ -109,7 +109,7 @@
 
                                 <a href="./login.html" class="signin-btn mb-2 mb-md-0"><i class="bi bi-shield-lock"></i> Publishers Login</a>
                                 
-                                <a href="{{ route('signup') }}" class="signup-btn"><i class="bi bi-plugin"></i> Publishers Signup</a>
+                                <a href="{{ env("CREATOR_BASE_URL").'/signup' }}" class="signup-btn"><i class="bi bi-plugin"></i> Publishers Signup</a>
                             </div>
                         </div>
                         <!-- Nav End -->
