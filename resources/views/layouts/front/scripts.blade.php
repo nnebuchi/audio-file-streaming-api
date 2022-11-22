@@ -36,6 +36,8 @@
     </script>
 
 
+
+
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
     <script src="{{ asset('front_assets/js/jquery/jquery-2.2.4.min.js')}}"></script>

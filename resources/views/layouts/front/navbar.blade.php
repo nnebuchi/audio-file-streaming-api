@@ -107,8 +107,9 @@
                                     <img src="{{ asset('front_assets/img/bg-img/add.png')}}" alt="">
                                 </a> -->
 
-                                <a href="./login.html" class="signin-btn"><i class="bi bi-shield-lock"></i> Sign in</a>
-                                <a href="#" class="signup-btn"><i class="bi bi-plugin"></i> Create an account</a>
+                                <a href="./login.html" class="signin-btn mb-2 mb-md-0"><i class="bi bi-shield-lock"></i> Publishers Login</a>
+                                
+                                <a href="{{ route('signup') }}" class="signup-btn"><i class="bi bi-plugin"></i> Publishers Signup</a>
                             </div>
                         </div>
                         <!-- Nav End -->
