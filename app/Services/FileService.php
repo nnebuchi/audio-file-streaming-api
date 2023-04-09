@@ -59,8 +59,6 @@ class FileService{
         if($request->publisher_id){
             $files = $files->where('creator_id', sanitize_input($request->publisher_id));
         }
-        
-        
 
         if($request->publishers && $request->publishers == 'my-pick'){
             
